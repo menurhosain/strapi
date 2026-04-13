@@ -430,6 +430,62 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiApplicantApplicant extends Struct.CollectionTypeSchema {
+  collectionName: 'applicants';
+  info: {
+    displayName: 'Applicant';
+    pluralName: 'applicants';
+    singularName: 'applicant';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    adminNotes: Schema.Attribute.Text;
+    appliedAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    cvFile: Schema.Attribute.Media<'files' | 'images'> &
+      Schema.Attribute.Required;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    experienceYears: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 50;
+          min: 0;
+        },
+        number
+      >;
+    firstName: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.Enumeration<
+      ['new', 'shortlisted', 'interview', 'hired', 'rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'new'>;
+    lastName: Schema.Attribute.String & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::applicant.applicant'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    skills: Schema.Attribute.JSON;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   collectionName: 'globals';
   info: {
@@ -973,6 +1029,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::applicant.applicant': ApiApplicantApplicant;
       'api::global.global': ApiGlobalGlobal;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

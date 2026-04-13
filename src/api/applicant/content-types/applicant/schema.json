@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "applicants",
+  "info": {
+    "singularName": "applicant",
+    "pluralName": "applicants",
+    "displayName": "Applicant"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "unique": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "cvFile": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
+    "skills": {
+      "type": "json"
+    },
+    "experienceYears": {
+      "type": "integer",
+      "min": 0,
+      "max": 50
+    },
+    "location": {
+      "type": "string"
+    },
+    "label": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "shortlisted",
+        "interview",
+        "hired",
+        "rejected"
+      ],
+      "default": "new",
+      "required": true
+    },
+    "adminNotes": {
+      "type": "text"
+    },
+    "appliedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
