@@ -37,7 +37,7 @@
       ]
     },
     "skills": {
-      "type": "json"
+      "type": "string"
     },
     "experienceYears": {
       "type": "integer",
@@ -49,15 +49,15 @@
     },
     "label": {
       "type": "enumeration",
+      "required": true,
+      "default": "new",
       "enum": [
         "new",
         "shortlisted",
         "interview",
         "hired",
         "rejected"
-      ],
-      "default": "new",
-      "required": true
+      ]
     },
     "adminNotes": {
       "type": "text"
