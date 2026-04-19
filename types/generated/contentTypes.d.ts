@@ -448,9 +448,7 @@ export interface ApiApplicantApplicant extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     cvFile: Schema.Attribute.Media<'files' | 'images'> &
       Schema.Attribute.Required;
-    email: Schema.Attribute.Email &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
     experienceYears: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
