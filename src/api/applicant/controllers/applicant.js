@@ -23,5 +23,30 @@ module.exports = createCoreController(
 
       return this.transformResponse(entity);
     },
+
+    async find(ctx) {
+      const user = ctx.state.user;
+
+      if (!user) {
+        return ctx.unauthorized("Login required");
+      }
+
+      // Ignore incoming filters from client (important)
+      const { query } = ctx;
+
+      const data = await strapi.entityService.findMany(
+        "api::applicant.applicant",
+        {
+          ...query, // keep pagination, populate, etc.
+          filters: {
+            user: {
+              id: user.id,
+            },
+          },
+        },
+      );
+
+      return this.transformResponse(data);
+    },
   }),
 );
