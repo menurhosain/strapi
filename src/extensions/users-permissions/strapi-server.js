@@ -1,4 +1,32 @@
 module.exports = (plugin) => {
+  const originalUser = plugin.controllers.user;
+
+  plugin.controllers.user = ({ strapi }) => {
+    const base =
+      typeof originalUser === "function"
+        ? originalUser({ strapi })
+        : originalUser;
+
+    return {
+      ...base,
+
+      update: async (ctx) => {
+        const { id } = ctx.params;
+        const authenticatedUser = ctx.state.user;
+
+        if (!authenticatedUser) {
+          return ctx.unauthorized("You must be logged in.");
+        }
+
+        if (String(authenticatedUser.id) !== String(id)) {
+          return ctx.forbidden("You can only update your own profile.");
+        }
+
+        return base.update(ctx);
+      },
+    };
+  };
+
   const originalAuth = plugin.controllers.auth;
 
   plugin.controllers.auth = ({ strapi }) => ({
@@ -87,21 +115,19 @@ module.exports = (plugin) => {
       }
 
       // ── Create user ──────────────────────────────────────────────
-      const user = await strapi
-        .service("plugin::users-permissions.user")
-        .add({
-          username,
-          email: email.toLowerCase(),
-          password,
-          first_name,
-          last_name,
-          phone,
-          location,
-          type,
-          role: role.id,
-          confirmed: true,
-          provider: "local",
-        });
+      const user = await strapi.service("plugin::users-permissions.user").add({
+        username,
+        email: email.toLowerCase(),
+        password,
+        first_name,
+        last_name,
+        phone,
+        location,
+        type,
+        role: role.id,
+        confirmed: true,
+        provider: "local",
+      });
 
       // ── Generate JWT ─────────────────────────────────────────────
       const jwt = strapi
