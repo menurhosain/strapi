@@ -1000,6 +1000,7 @@ export interface PluginUsersPermissionsUser
         minLength: 6;
       }>;
     phone: Schema.Attribute.String & Schema.Attribute.Required;
+    profile_picture: Schema.Attribute.Media<'images'>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;

@@ -83,6 +83,12 @@
     },
     "location": {
       "type": "string"
+    },
+    "profile_picture": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
     }
   }
 }
