@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subcontractors",
+  "info": {
+    "singularName": "subcontractor",
+    "pluralName": "subcontractors",
+    "displayName": "Subcontractor"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "documents": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "files",
+        "images"
+      ]
+    },
+    "experienceYears": {
+      "type": "integer",
+      "min": 0,
+      "max": 50
+    },
+    "location": {
+      "type": "string"
+    },
+    "label": {
+      "type": "enumeration",
+      "required": true,
+      "default": "New",
+      "enum": [
+        "New",
+        "Approved",
+        "Contacted",
+        "Rejected"
+      ]
+    },
+    "adminNotes": {
+      "type": "text"
+    },
+    "appliedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

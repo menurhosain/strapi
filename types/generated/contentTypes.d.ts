@@ -516,6 +516,58 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiSubcontractorSubcontractor
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'subcontractors';
+  info: {
+    displayName: 'Subcontractor';
+    pluralName: 'subcontractors';
+    singularName: 'subcontractor';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    adminNotes: Schema.Attribute.Text;
+    appliedAt: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    companyName: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    documents: Schema.Attribute.Media<'files' | 'images', true>;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    experienceYears: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 50;
+          min: 0;
+        },
+        number
+      >;
+    label: Schema.Attribute.Enumeration<
+      ['New', 'Approved', 'Contacted', 'Rejected']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'New'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subcontractor.subcontractor'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1034,6 +1086,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::applicant.applicant': ApiApplicantApplicant;
       'api::global.global': ApiGlobalGlobal;
+      'api::subcontractor.subcontractor': ApiSubcontractorSubcontractor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
