@@ -539,7 +539,7 @@ export interface ApiSubcontractorSubcontractor
     experienceYears: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
-          max: 50;
+          max: 100;
           min: 0;
         },
         number

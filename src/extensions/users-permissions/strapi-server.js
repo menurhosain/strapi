@@ -109,9 +109,7 @@ module.exports = (plugin) => {
         .findOne({ where: { type } });
 
       if (!role) {
-        return ctx.badRequest(
-          `Role '${type}' not found. Create it in Settings → Roles.`,
-        );
+        return ctx.badRequest(`Role '${type}' not found.`);
       }
 
       // ── Create user ──────────────────────────────────────────────
