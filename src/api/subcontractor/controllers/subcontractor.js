@@ -1,5 +1,200 @@
 "use strict";
 
+/**
+ * @openapi
+ * tags:
+ *   - name: Subcontractors
+ *     description: Subcontractor profiles (contractor role required)
+ *
+ * components:
+ *   schemas:
+ *     SubcontractorInput:
+ *       type: object
+ *       required: [companyName, email, label]
+ *       properties:
+ *         companyName:
+ *           type: string
+ *           example: "Acme Construction Ltd"
+ *         email:
+ *           type: string
+ *           format: email
+ *           example: contact@acme.com
+ *         phone:
+ *           type: string
+ *           example: "+1234567890"
+ *         documents:
+ *           type: array
+ *           items:
+ *             type: integer
+ *           description: Strapi media file IDs
+ *         experienceYears:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 100
+ *           example: 5
+ *         location:
+ *           type: string
+ *           example: "Chicago"
+ *         label:
+ *           type: string
+ *           enum: [New, Approved, Contacted, Rejected]
+ *           default: New
+ *         adminNotes:
+ *           type: string
+ *
+ *     SubcontractorResponse:
+ *       type: object
+ *       properties:
+ *         data:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: integer
+ *             attributes:
+ *               allOf:
+ *                 - $ref: '#/components/schemas/SubcontractorInput'
+ *                 - type: object
+ *                   properties:
+ *                     appliedAt:
+ *                       type: string
+ *                       format: date-time
+ *         meta:
+ *           type: object
+ *
+ * /api/subcontractors:
+ *   post:
+ *     tags: [Subcontractors]
+ *     summary: Register a new subcontractor
+ *     description: Only users with the `contractor` role can create a subcontractor entry. `appliedAt` is set automatically.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               data:
+ *                 $ref: '#/components/schemas/SubcontractorInput'
+ *     responses:
+ *       200:
+ *         description: Subcontractor created
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SubcontractorResponse'
+ *       401:
+ *         description: Login required
+ *       403:
+ *         description: Only contractors can access this resource
+ *
+ *   get:
+ *     tags: [Subcontractors]
+ *     summary: List subcontractors for the authenticated contractor
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: pagination[page]
+ *         schema:
+ *           type: integer
+ *         example: 1
+ *       - in: query
+ *         name: pagination[pageSize]
+ *         schema:
+ *           type: integer
+ *         example: 25
+ *       - in: query
+ *         name: populate
+ *         schema:
+ *           type: string
+ *         example: documents
+ *     responses:
+ *       200:
+ *         description: List of subcontractors
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/SubcontractorInput'
+ *                 meta:
+ *                   type: object
+ *       401:
+ *         description: Login required
+ *       403:
+ *         description: Only contractors can access this resource
+ *
+ * /api/subcontractors/{id}:
+ *   get:
+ *     tags: [Subcontractors]
+ *     summary: Get a single subcontractor by ID
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Subcontractor found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SubcontractorResponse'
+ *       404:
+ *         description: Not found
+ *
+ *   put:
+ *     tags: [Subcontractors]
+ *     summary: Update a subcontractor
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               data:
+ *                 $ref: '#/components/schemas/SubcontractorInput'
+ *     responses:
+ *       200:
+ *         description: Subcontractor updated
+ *       404:
+ *         description: Not found
+ *
+ *   delete:
+ *     tags: [Subcontractors]
+ *     summary: Delete a subcontractor
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Subcontractor deleted
+ *       404:
+ *         description: Not found
+ */
+
 const { createCoreController } = require("@strapi/strapi").factories;
 
 async function assertContractor(ctx, strapi) {

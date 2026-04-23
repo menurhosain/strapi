@@ -26,7 +26,9 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "styled-components": "^6.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-dist": "^5.32.4"
   },
   "engines": {
     "node": ">=20.0.0 <=24.x.x",
