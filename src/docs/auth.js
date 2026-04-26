@@ -99,6 +99,61 @@
  *       400:
  *         description: Validation error, email/username already taken, or invalid type
  *
+ * /api/users/{user_id}:
+ *   put:
+ *     tags: [Auth]
+ *     summary: Update own profile
+ *     description: |
+ *       Updates the authenticated user's profile. Only `first_name`, `last_name`,
+ *       `phone`, `location`, and `profile_picture` can be changed. All other fields
+ *       are ignored. Upload the image first via `POST /api/upload` and pass the
+ *       returned file ID as `profile_picture`.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: user_id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID of the authenticated user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               first_name:
+ *                 type: string
+ *                 example: John
+ *               last_name:
+ *                 type: string
+ *                 example: Doe
+ *               phone:
+ *                 type: string
+ *                 example: "+1234567890"
+ *               location:
+ *                 type: string
+ *                 example: "New York, USA"
+ *               profile_picture:
+ *                 type: integer
+ *                 description: File ID returned from POST /api/upload
+ *                 example: 42
+ *     responses:
+ *       200:
+ *         description: Profile updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Validation error
+ *       401:
+ *         description: Missing or invalid Bearer token
+ *       403:
+ *         description: Attempting to update another user's profile
+ *
  * components:
  *   schemas:
  *     User:
