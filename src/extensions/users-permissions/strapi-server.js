@@ -22,6 +22,17 @@ module.exports = (plugin) => {
           return ctx.forbidden("You can only update your own profile.");
         }
 
+        const allowedFields = ["first_name", "last_name", "phone", "location", "profile_picture"];
+
+        const body = ctx.request.body;
+        const filtered = {};
+        for (const field of allowedFields) {
+          if (Object.prototype.hasOwnProperty.call(body, field)) {
+            filtered[field] = body[field];
+          }
+        }
+        ctx.request.body = filtered;
+
         return base.update(ctx);
       },
     };
