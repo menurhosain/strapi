@@ -243,6 +243,14 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
+const HIDDEN_FIELDS = ["createdAt", "updatedAt", "publishedAt", "adminNotes"];
+
+function sanitize(entity) {
+  const result = { ...entity };
+  for (const field of HIDDEN_FIELDS) delete result[field];
+  return result;
+}
+
 module.exports = createCoreController(
   "api::applicant.applicant",
   ({ strapi }) => ({
@@ -336,7 +344,7 @@ module.exports = createCoreController(
         },
       );
 
-      return this.transformResponse(data);
+      return this.transformResponse(data.map(sanitize));
     },
 
     async findOne(ctx) {
@@ -360,7 +368,11 @@ module.exports = createCoreController(
         return ctx.forbidden("You can only view your own applicants");
       }
 
-      return super.findOne(ctx);
+      const response = await super.findOne(ctx);
+      if (response?.data) {
+        response.data = sanitize(response.data);
+      }
+      return response;
     },
 
     async delete(ctx) {
