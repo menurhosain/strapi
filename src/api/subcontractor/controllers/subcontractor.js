@@ -65,7 +65,7 @@
  *   post:
  *     tags: [Subcontractors]
  *     summary: Register a new subcontractor
- *     description: Only users with the `contractor` role can create a subcontractor entry. `appliedAt` is set automatically.
+ *     description: Only users with the `contractor` role can create a subcontractor entry. `appliedAt`, `label`, and `adminNotes` are set automatically by the server.
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -76,7 +76,32 @@
  *             type: object
  *             properties:
  *               data:
- *                 $ref: '#/components/schemas/SubcontractorInput'
+ *                 type: object
+ *                 required: [companyName, email]
+ *                 properties:
+ *                   companyName:
+ *                     type: string
+ *                     example: "Acme Construction Ltd"
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *                     example: contact@acme.com
+ *                   phone:
+ *                     type: string
+ *                     example: "+1234567890"
+ *                   documents:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     description: Strapi media file IDs
+ *                   experienceYears:
+ *                     type: integer
+ *                     minimum: 0
+ *                     maximum: 100
+ *                     example: 5
+ *                   location:
+ *                     type: string
+ *                     example: "Chicago"
  *     responses:
  *       200:
  *         description: Subcontractor created
@@ -154,6 +179,7 @@
  *   put:
  *     tags: [Subcontractors]
  *     summary: Update a subcontractor
+ *     description: Only the fields below can be updated. `label` and `adminNotes` are managed by the admin panel.
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -170,27 +196,38 @@
  *             type: object
  *             properties:
  *               data:
- *                 $ref: '#/components/schemas/SubcontractorInput'
+ *                 type: object
+ *                 properties:
+ *                   companyName:
+ *                     type: string
+ *                     example: "Acme Construction Ltd"
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *                     example: contact@acme.com
+ *                   phone:
+ *                     type: string
+ *                     example: "+1234567890"
+ *                   documents:
+ *                     type: array
+ *                     items:
+ *                       type: integer
+ *                     description: Strapi media file IDs
+ *                   experienceYears:
+ *                     type: integer
+ *                     minimum: 0
+ *                     maximum: 100
+ *                     example: 5
+ *                   location:
+ *                     type: string
+ *                     example: "Chicago"
  *     responses:
  *       200:
  *         description: Subcontractor updated
- *       404:
- *         description: Not found
- *
- *   delete:
- *     tags: [Subcontractors]
- *     summary: Delete a subcontractor
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Subcontractor deleted
+ *       401:
+ *         description: Login required
+ *       403:
+ *         description: Only contractors can access this resource
  *       404:
  *         description: Not found
  */

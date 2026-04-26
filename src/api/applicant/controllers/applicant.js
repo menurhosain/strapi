@@ -67,7 +67,7 @@
  *   post:
  *     tags: [Applicants]
  *     summary: Submit a new applicant
- *     description: Creates an applicant entry linked to the authenticated user.
+ *     description: Creates an applicant entry linked to the authenticated user. `label` and `adminNotes` are set by the admin panel.
  *     security:
  *       - bearerAuth: []
  *     requestBody:
@@ -78,7 +78,37 @@
  *             type: object
  *             properties:
  *               data:
- *                 $ref: '#/components/schemas/ApplicantInput'
+ *                 type: object
+ *                 required: [firstName, lastName, email, cvFile]
+ *                 properties:
+ *                   firstName:
+ *                     type: string
+ *                     example: John
+ *                   lastName:
+ *                     type: string
+ *                     example: Doe
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *                     example: john@example.com
+ *                   phone:
+ *                     type: string
+ *                     example: "+1234567890"
+ *                   cvFile:
+ *                     type: integer
+ *                     description: Strapi media file ID
+ *                     example: 1
+ *                   skills:
+ *                     type: string
+ *                     example: "JavaScript, Node.js"
+ *                   experienceYears:
+ *                     type: integer
+ *                     minimum: 0
+ *                     maximum: 50
+ *                     example: 3
+ *                   location:
+ *                     type: string
+ *                     example: "New York"
  *     responses:
  *       200:
  *         description: Applicant created
@@ -153,6 +183,7 @@
  *   put:
  *     tags: [Applicants]
  *     summary: Update an applicant
+ *     description: Only the fields below can be updated. `label` and `adminNotes` are managed by the admin panel.
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -169,27 +200,43 @@
  *             type: object
  *             properties:
  *               data:
- *                 $ref: '#/components/schemas/ApplicantInput'
+ *                 type: object
+ *                 properties:
+ *                   firstName:
+ *                     type: string
+ *                     example: John
+ *                   lastName:
+ *                     type: string
+ *                     example: Doe
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *                     example: john@example.com
+ *                   phone:
+ *                     type: string
+ *                     example: "+1234567890"
+ *                   cvFile:
+ *                     type: integer
+ *                     description: Strapi media file ID
+ *                     example: 1
+ *                   skills:
+ *                     type: string
+ *                     example: "JavaScript, Node.js"
+ *                   experienceYears:
+ *                     type: integer
+ *                     minimum: 0
+ *                     maximum: 50
+ *                     example: 3
+ *                   location:
+ *                     type: string
+ *                     example: "New York"
  *     responses:
  *       200:
  *         description: Applicant updated
- *       404:
- *         description: Not found
- *
- *   delete:
- *     tags: [Applicants]
- *     summary: Delete an applicant
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Applicant deleted
+ *       401:
+ *         description: Login required
+ *       403:
+ *         description: You can only update your own applicants
  *       404:
  *         description: Not found
  */
@@ -206,16 +253,66 @@ module.exports = createCoreController(
         return ctx.unauthorized("Login required");
       }
 
-      const body = ctx.request.body;
+      const {
+        firstName,
+        lastName,
+        email,
+        phone,
+        cvFile,
+        skills,
+        experienceYears,
+        location,
+      } = ctx.request.body.data ?? {};
 
       const entity = await strapi.entityService.create(
         "api::applicant.applicant",
         {
-          data: { ...body.data, user: user.id },
+          data: {
+            firstName,
+            lastName,
+            email,
+            phone,
+            cvFile,
+            skills,
+            experienceYears,
+            location,
+            appliedAt: new Date(),
+            user: user.id,
+          },
         },
       );
 
       return this.transformResponse(entity);
+    },
+
+    async update(ctx) {
+      const user = ctx.state.user;
+
+      if (!user) {
+        return ctx.unauthorized("Login required");
+      }
+
+      const allowedFields = [
+        "firstName",
+        "lastName",
+        "email",
+        "phone",
+        "cvFile",
+        "skills",
+        "experienceYears",
+        "location",
+      ];
+
+      const body = ctx.request.body.data ?? {};
+      const filtered = {};
+      for (const field of allowedFields) {
+        if (Object.prototype.hasOwnProperty.call(body, field)) {
+          filtered[field] = body[field];
+        }
+      }
+      ctx.request.body = { data: filtered };
+
+      return super.update(ctx);
     },
 
     async find(ctx) {
