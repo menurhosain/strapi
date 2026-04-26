@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
-const uiDistDir = path.dirname(require.resolve('swagger-ui-dist/package.json'));
+const uiDistDir = path.dirname(require.resolve("swagger-ui-dist/package.json"));
 
 let cachedSpec = null;
 let cachedBundle = null;
@@ -12,30 +12,30 @@ let cachedCss = null;
 function getSpec() {
   if (cachedSpec) return cachedSpec;
 
-  const swaggerJsdoc = require('swagger-jsdoc');
+  const swaggerJsdoc = require("swagger-jsdoc");
 
   cachedSpec = swaggerJsdoc({
     definition: {
-      openapi: '3.0.0',
+      openapi: "3.0.0",
       info: {
-        title: 'NextJS Backend API',
-        version: '1.0.0',
-        description: 'REST API documentation for the Strapi v5 backend',
+        title: "NextJS Backend API",
+        version: "1.0.0",
+        description: "REST API documentation for the Strapi v5 backend",
       },
-      servers: [{ url: 'http://localhost:1337', description: 'Local dev' }],
+      servers: [{ url: "http://localhost:1337", description: "Local dev" }],
       components: {
         securitySchemes: {
           bearerAuth: {
-            type: 'http',
-            scheme: 'bearer',
-            bearerFormat: 'JWT',
+            type: "http",
+            scheme: "bearer",
+            bearerFormat: "JWT",
           },
         },
       },
     },
     apis: [
-      path.join(process.cwd(), 'src/api/**/controllers/*.js'),
-      path.join(process.cwd(), 'src/docs/*.js'),
+      path.join(process.cwd(), "src/api/**/controllers/*.js"),
+      path.join(process.cwd(), "src/docs/*.js"),
     ],
   });
 
@@ -43,12 +43,16 @@ function getSpec() {
 }
 
 function getBundle() {
-  if (!cachedBundle) cachedBundle = fs.readFileSync(path.join(uiDistDir, 'swagger-ui-bundle.js'));
+  if (!cachedBundle)
+    cachedBundle = fs.readFileSync(
+      path.join(uiDistDir, "swagger-ui-bundle.js"),
+    );
   return cachedBundle;
 }
 
 function getCss() {
-  if (!cachedCss) cachedCss = fs.readFileSync(path.join(uiDistDir, 'swagger-ui.css'));
+  if (!cachedCss)
+    cachedCss = fs.readFileSync(path.join(uiDistDir, "swagger-ui.css"));
   return cachedCss;
 }
 
@@ -83,32 +87,32 @@ const html = `<!DOCTYPE html>
 module.exports = (_config, _helpers) => {
   return async (ctx, next) => {
     switch (ctx.path) {
-      case '/api-docs':
-      case '/api-docs/':
+      case "/api-docs":
+      case "/api-docs/":
         ctx.body = html;
-        ctx.type = 'text/html';
+        ctx.type = "text/html";
         return;
 
-      case '/api-docs/swagger.json':
+      case "/api-docs/swagger.json":
         ctx.body = getSpec();
-        ctx.type = 'application/json';
+        ctx.type = "application/json";
         return;
 
-      case '/api-docs/swagger-ui-bundle.js':
+      case "/api-docs/swagger-ui-bundle.js":
         ctx.body = getBundle();
-        ctx.type = 'application/javascript';
-        ctx.set('Cache-Control', 'public, max-age=86400');
+        ctx.type = "application/javascript";
+        ctx.set("Cache-Control", "public, max-age=86400");
         return;
 
-      case '/api-docs/swagger-ui.css':
+      case "/api-docs/swagger-ui.css":
         ctx.body = getCss();
-        ctx.type = 'text/css';
-        ctx.set('Cache-Control', 'public, max-age=86400');
+        ctx.type = "text/css";
+        ctx.set("Cache-Control", "public, max-age=86400");
         return;
 
-      case '/api-docs/swagger-init.js':
+      case "/api-docs/swagger-init.js":
         ctx.body = initScript;
-        ctx.type = 'application/javascript';
+        ctx.type = "application/javascript";
         return;
     }
 

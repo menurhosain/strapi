@@ -132,6 +132,17 @@ module.exports = (plugin) => {
         .service("plugin::users-permissions.jwt")
         .issue({ id: user.id });
 
+      //remove fields form user object
+      [
+        "password",
+        "resetPasswordToken",
+        "confirmationToken",
+        "confirmed",
+        "blocked",
+      ].forEach((cur) => {
+        delete user[cur];
+      });
+
       ctx.send({ jwt, user });
     },
   });
