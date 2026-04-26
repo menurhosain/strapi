@@ -222,8 +222,14 @@ module.exports = createCoreController(
       const user = await assertContractor(ctx, strapi);
       if (!user) return;
 
-      const { companyName, email, phone, documents, experienceYears, location } =
-        ctx.request.body.data ?? {};
+      const {
+        companyName,
+        email,
+        phone,
+        documents,
+        experienceYears,
+        location,
+      } = ctx.request.body.data ?? {};
 
       const entity = await strapi.entityService.create(
         "api::subcontractor.subcontractor",
@@ -263,6 +269,33 @@ module.exports = createCoreController(
       );
 
       return this.transformResponse(data);
+    },
+
+    async findOne(ctx) {
+      const user = await assertContractor(ctx, strapi);
+      if (!user) return;
+
+      const { id } = ctx.params;
+
+      const entity = await strapi.db
+        .query("api::subcontractor.subcontractor")
+        .findOne({ where: { documentId: id }, populate: ["user"] });
+
+      if (!entity) {
+        return ctx.notFound("Subcontractor not found");
+      }
+
+      if (String(entity.user?.id) !== String(user.id)) {
+        return ctx.forbidden("You can only view your own subcontractors");
+      }
+
+      return super.findOne(ctx);
+    },
+
+    async delete(ctx) {
+      return ctx.forbidden(
+        "Deleting subcontractors is not allowed via the API",
+      );
     },
   }),
 );

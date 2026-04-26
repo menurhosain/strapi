@@ -225,13 +225,12 @@ module.exports = createCoreController(
         return ctx.unauthorized("Login required");
       }
 
-      // Ignore incoming filters from client (important)
       const { query } = ctx;
 
       const data = await strapi.entityService.findMany(
         "api::applicant.applicant",
         {
-          ...query, // keep pagination, populate, etc.
+          ...query,
           filters: {
             user: {
               id: user.id,
@@ -241,6 +240,34 @@ module.exports = createCoreController(
       );
 
       return this.transformResponse(data);
+    },
+
+    async findOne(ctx) {
+      const user = ctx.state.user;
+
+      if (!user) {
+        return ctx.unauthorized("Login required");
+      }
+
+      const { id } = ctx.params;
+
+      const entity = await strapi.db
+        .query("api::applicant.applicant")
+        .findOne({ where: { documentId: id }, populate: ["user"] });
+
+      if (!entity) {
+        return ctx.notFound("Applicant not found");
+      }
+
+      if (String(entity.user?.id) !== String(user.id)) {
+        return ctx.forbidden("You can only view your own applicants");
+      }
+
+      return super.findOne(ctx);
+    },
+
+    async delete(ctx) {
+      return ctx.forbidden("Deleting applicants is not allowed via the API");
     },
   }),
 );
