@@ -16,6 +16,14 @@ function injectGoogleLogin() {
 function waitForLoginForm() {
   const observer = new MutationObserver(() => {
     // Strapi admin login form has a submit button — use it as the anchor
+    const isLoginPage = window.location.pathname.includes("/auth/login");
+
+    if (!isLoginPage) {
+      const existing = document.getElementById("google-signin-wrapper");
+      if (existing) existing.remove();
+      return;
+    }
+
     const submitBtn = document.querySelector("form button[type='submit']");
     if (submitBtn && !document.getElementById("google-signin-wrapper")) {
       observer.disconnect();
