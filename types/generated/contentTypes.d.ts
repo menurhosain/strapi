@@ -599,6 +599,51 @@ export interface ApiLocationLocation extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProjectProject extends Struct.CollectionTypeSchema {
+  collectionName: 'projects';
+  info: {
+    displayName: 'Project';
+    pluralName: 'projects';
+    singularName: 'project';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clientName: Schema.Attribute.String;
+    content: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    endDate: Schema.Attribute.Date;
+    featuredImage: Schema.Attribute.Media<'images'>;
+    imageGallery: Schema.Attribute.Media<'images', true>;
+    imageGallerySecond: Schema.Attribute.Media<'images', true>;
+    industries: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::industry.industry'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project.project'
+    > &
+      Schema.Attribute.Private;
+    locations: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::location.location'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    scopes: Schema.Attribute.Relation<'manyToMany', 'api::scope.scope'>;
+    startDate: Schema.Attribute.Date;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    year: Schema.Attribute.Integer;
+  };
+}
+
 export interface ApiScopeScope extends Struct.CollectionTypeSchema {
   collectionName: 'scopes';
   info: {
@@ -1198,6 +1243,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::industry.industry': ApiIndustryIndustry;
       'api::location.location': ApiLocationLocation;
+      'api::project.project': ApiProjectProject;
       'api::scope.scope': ApiScopeScope;
       'api::subcontractor.subcontractor': ApiSubcontractorSubcontractor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
