@@ -15,22 +15,80 @@ Strapi has no built-in test runner — there are no tests in this project.
 
 ## Architecture
 
-This is a **Strapi v5** headless CMS backend, intended to serve as the API layer for a Next.js frontend.
+This is a **Strapi v5** headless CMS backend serving as the API layer for a Next.js frontend.
 
-**Content types** live under `src/api/<name>/content-types/<name>/schema.json`. Currently only `global` (a single-type) is defined. New content types follow the pattern: `routes/`, `controllers/`, `services/`, and `content-types/` directories under `src/api/<name>/`.
+### Content Types
 
-**Shared components** are in `src/components/shared/` — `seo`, `media`, `quote`, `rich-text`, and `slider`. These are reusable across content types via the `component` attribute type in schemas.
+- `src/api/global/` — single-type for site-wide settings
+- `src/api/applicant/` — job applicant submissions (collection type)
+- `src/api/subcontractor/` — subcontractor profiles (collection type)
 
-**Database** defaults to MySQL (`DATABASE_CLIENT=mysql`, database `nextjs`, user `nur`). The config in `config/database.js` also supports `postgres` and `sqlite` via the `DATABASE_CLIENT` env var.
+Each content type follows the pattern: `routes/`, `controllers/`, `services/`, `content-types/` under `src/api/<name>/`.
 
-**Seeding** (`scripts/seed.js`) reads from `data/data.json` and uploads images from `data/uploads/`. It uses a Strapi plugin store flag (`initHasRun`) to ensure it only runs once. The seed sets public read permissions for `article`, `category`, `author`, `global`, and `about` content types — these content types will need to be created before seeding can succeed.
+**Shared components** (`src/components/shared/`): `seo`, `media`, `quote`, `rich-text`, `slider` — reusable across content types via `component` attribute in schemas.
 
-**Config files:**
+### User Roles & Registration
+
+The `users-permissions` plugin is extended in `src/extensions/users-permissions/`:
+
+- **User schema** adds custom fields to the default user: `first_name` (required), `last_name`, `phone` (required), `location`, `type` (required), `profile_picture` (media).
+- **Register override** (`strapi-server.js`): validates required fields, enforces `type` must be `applicant` or `contractor`, assigns the matching role, and strips sensitive fields from the response. Users are auto-confirmed on registration.
+- **Update override**: only `first_name`, `last_name`, `phone`, `location`, `profile_picture` can be updated; users can only update their own profile.
+
+Two roles must exist in the DB: `applicant` and `contractor` (matched by `role.type`).
+
+### Controller Security Patterns
+
+Both `applicant` and `subcontractor` controllers share the same security approach:
+
+- **HIDDEN_FIELDS**: `createdAt`, `updatedAt`, `publishedAt`, `adminNotes` are stripped from all user-facing responses via a `sanitize()` helper.
+- **Field whitelisting on write**: `create` and `update` only pass an explicit allowlist of fields to the entity service, preventing mass assignment of admin-only fields like `label` and `adminNotes`.
+- **Ownership enforcement**: `find` hard-filters by `user.id`; `findOne` fetches with `populate: ["user"]` and compares IDs before returning.
+- **Delete is disabled**: returns `403 Forbidden` for both content types.
+- **Subcontractor extra gate**: `assertContractor()` checks `role.type === "contractor"` on every action.
+
+### Admin Google OAuth
+
+`src/api/admin-auth/` adds a public route `POST /api/admin-google-auth` that:
+1. Verifies a Google ID token via `google-auth-library`
+2. Looks up a Strapi **admin** user (not a front-end user) by email
+3. Issues an admin JWT signed with `strapi.config.get("admin.auth.secret")`
+
+`src/admin/app.js` (the active admin panel customization) injects the Google Sign-In button into the `/admin/auth/login` page via a `MutationObserver`. It reads the client ID from `process.env.STRAPI_ADMIN_GOOGLE_CLIENT_ID`.
+
+### Swagger / API Docs
+
+`src/middlewares/swagger.js` is registered as `global::swagger` in `config/middlewares.js` and serves:
+- `GET /api-docs` — Swagger UI HTML
+- `GET /api-docs/swagger.json` — generated OpenAPI spec
+
+The spec is built from `@openapi` JSDoc comments in `src/api/**/controllers/*.js` and `src/docs/*.js`. Add new endpoint docs to the relevant controller file or create a new file under `src/docs/`.
+
+### Plugins
+
+- **Email** (`@strapi/provider-email-nodemailer`): configured via `SMTP_*` env vars in `config/plugins.js`.
+- **Upload**: 5 MB limit; allows images (JPEG, PNG, WebP), PDF, and Word documents (`.doc`, `.docx`).
+
+### Config Files
+
 - `config/server.js` — host/port (default `0.0.0.0:1337`)
 - `config/api.js` — REST defaults: limit 25, max 100, `withCount: true`
-- `config/middlewares.js` — standard Strapi middleware stack
-- `config/plugins.js` — empty (no plugins configured beyond defaults)
+- `config/middlewares.js` — standard stack + `global::swagger`; CSP allows `https://accounts.google.com` for the admin Google login button
+- `config/plugins.js` — email (nodemailer) and upload configuration
+- `config/database.js` — defaults to MySQL; supports `postgres` and `sqlite` via `DATABASE_CLIENT` env var
 
-**Environment variables** required (see `.env.example`): `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, `ENCRYPTION_KEY`. Database vars: `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`.
+### Database
 
-The admin panel customization entry points are `src/admin/app.example.js` and `src/admin/vite.config.example.js` (rename to remove `.example` to activate).
+MySQL by default (`DATABASE_CLIENT=mysql`, database `nextjs`, user `nur`).
+
+**Seeding** (`scripts/seed.js`): reads `data/data.json`, uploads images from `data/uploads/`. Uses a Strapi plugin store flag (`initHasRun`) to run only once. Seed requires `article`, `category`, `author`, `global`, and `about` content types to exist first.
+
+### Environment Variables
+
+Core (see `.env.example`): `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`, `JWT_SECRET`, `ENCRYPTION_KEY`
+
+Database: `DATABASE_HOST`, `DATABASE_PORT`, `DATABASE_NAME`, `DATABASE_USERNAME`, `DATABASE_PASSWORD`
+
+Google OAuth: `GOOGLE_CLIENT_ID` (API verification), `STRAPI_ADMIN_GOOGLE_CLIENT_ID` (admin panel button)
+
+Email: `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM`

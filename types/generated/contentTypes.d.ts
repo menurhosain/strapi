@@ -539,6 +539,33 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiScopeScope extends Struct.CollectionTypeSchema {
+  collectionName: 'scopes';
+  info: {
+    displayName: 'Scope';
+    pluralName: 'scopes';
+    singularName: 'scope';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::scope.scope'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSubcontractorSubcontractor
   extends Struct.CollectionTypeSchema {
   collectionName: 'subcontractors';
@@ -1109,6 +1136,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::applicant.applicant': ApiApplicantApplicant;
       'api::global.global': ApiGlobalGlobal;
+      'api::scope.scope': ApiScopeScope;
       'api::subcontractor.subcontractor': ApiSubcontractorSubcontractor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
