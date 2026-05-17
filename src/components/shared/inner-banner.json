@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_inner_banners",
+  "info": {
+    "displayName": "Inner banner"
+  },
+  "options": {},
+  "attributes": {
+    "banner_label": {
+      "type": "string"
+    },
+    "banner_title": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
