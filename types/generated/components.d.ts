@@ -50,6 +50,20 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedServiceCard extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_cards';
+  info: {
+    displayName: 'Service Card';
+  };
+  attributes: {
+    button_label: Schema.Attribute.String;
+    button_link: Schema.Attribute.String;
+    description: Schema.Attribute.Text;
+    svg: Schema.Attribute.Text;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface SharedSlider extends Struct.ComponentSchema {
   collectionName: 'components_shared_sliders';
   info: {
@@ -69,6 +83,7 @@ declare module '@strapi/strapi' {
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
+      'shared.service-card': SharedServiceCard;
       'shared.slider': SharedSlider;
     }
   }

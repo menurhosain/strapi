@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "service_cards",
+  "info": {
+    "singularName": "service-card",
+    "pluralName": "service-cards",
+    "displayName": "Service Card"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "service_card": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.service-card",
+      "repeatable": true
+    }
+  }
+}
