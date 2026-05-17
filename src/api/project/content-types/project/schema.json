@@ -1,73 +1,122 @@
 {
-	"kind": "collectionType",
-	"collectionName": "projects",
-	"info": {
-		"singularName": "project",
-		"pluralName": "projects",
-		"displayName": "Project"
-	},
-	"options": {
-		"draftAndPublish": true
-	},
-	"pluginOptions": {},
-	"attributes": {
-		"title": {
-			"type": "string",
-			"required": true
-		},
-		"featuredImage": {
-			"type": "media",
-			"multiple": false,
-			"required": false,
-			"allowedTypes": [
-				"images"
-			]
-		},
-		"year": {
-			"type": "integer"
-		},
-		"startDate": {
-			"type": "date"
-		},
-		"endDate": {
-			"type": "date"
-		},
-		"clientName": {
-			"type": "string"
-		},
-		"imageGallery": {
-			"type": "media",
-			"multiple": true,
-			"required": false,
-			"allowedTypes": [
-				"images"
-			]
-		},
-		"imageGallerySecond": {
-			"type": "media",
-			"multiple": true,
-			"required": false,
-			"allowedTypes": [
-				"images"
-			]
-		},
-		"content": {
-			"type": "blocks"
-		},
-		"scopes": {
-			"type": "relation",
-			"relation": "manyToMany",
-			"target": "api::scope.scope"
-		},
-		"industries": {
-			"type": "relation",
-			"relation": "manyToMany",
-			"target": "api::industry.industry"
-		},
-		"locations": {
-			"type": "relation",
-			"relation": "manyToMany",
-			"target": "api::location.location"
-		}
-	}
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "featuredImage": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "year": {
+      "type": "integer",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "startDate": {
+      "type": "date",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "endDate": {
+      "type": "date",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "clientName": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "imageGallery": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "imageGallerySecond": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "content": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "scopes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::scope.scope"
+    },
+    "industries": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::industry.industry"
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::location.location"
+    }
+  }
 }
