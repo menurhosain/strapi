@@ -12,6 +12,17 @@ export interface SharedButton extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedInnerBanner extends Struct.ComponentSchema {
+  collectionName: 'components_shared_inner_banners';
+  info: {
+    displayName: 'Inner banner';
+  };
+  attributes: {
+    banner_label: Schema.Attribute.String;
+    banner_title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -105,6 +116,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.button': SharedButton;
+      'shared.inner-banner': SharedInnerBanner;
       'shared.media': SharedMedia;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

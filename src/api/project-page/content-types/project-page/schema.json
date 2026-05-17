@@ -98,24 +98,6 @@
       },
       "default": "Apply Filters"
     },
-    "pagination_next_label": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "default": "Next"
-    },
-    "pagination_previous_label": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "default": "Previous"
-    },
     "project_card_year_label": {
       "type": "string",
       "pluginOptions": {
@@ -133,6 +115,24 @@
         }
       },
       "default": "Location"
+    },
+    "pagination_next_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Next"
+    },
+    "pagination_previous_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Previous"
     }
   }
 }
