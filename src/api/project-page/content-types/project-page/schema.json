@@ -133,6 +133,24 @@
         }
       },
       "default": "Previous"
+    },
+    "no_project_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "No projects found."
+    },
+    "no_project_description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Try narrowing your search or adjusting the filters."
     }
   }
 }

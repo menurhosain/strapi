@@ -10,6 +10,14 @@
     },
     "banner_title": {
       "type": "string"
+    },
+    "banner_bg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
     }
   },
   "config": {}
