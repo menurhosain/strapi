@@ -86,7 +86,15 @@
         }
       }
     },
-    "service_section_main_title": {
+    "service_section_title_normal": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "service_section_title_animated": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
@@ -141,7 +149,7 @@
           "localized": true
         }
       },
-      "multiple": true,
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files",
@@ -276,6 +284,36 @@
           "localized": true
         }
       }
+    },
+    "banner_background": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "partner_logos": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }
