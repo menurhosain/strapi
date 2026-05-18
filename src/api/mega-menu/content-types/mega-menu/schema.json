@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "service_cards",
+  "collectionName": "mega_menus",
   "info": {
-    "singularName": "service-card",
-    "pluralName": "service-cards",
-    "displayName": "Service Cards"
+    "singularName": "mega-menu",
+    "pluralName": "mega-menus",
+    "displayName": "mega_menu"
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +15,14 @@
     }
   },
   "attributes": {
-    "service_card": {
+    "menus": {
       "type": "component",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "shared.service-card",
+      "component": "shared.navigation-item",
       "repeatable": true
     }
   }

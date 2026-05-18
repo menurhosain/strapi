@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_nav_info_cards",
+  "info": {
+    "displayName": "nav  info card"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "action_link_label": {
+      "type": "string"
+    },
+    "action_link_href": {
+      "type": "string"
+    },
+    "bg_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}
