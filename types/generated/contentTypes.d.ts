@@ -638,8 +638,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
         };
       }>;
     about_left_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
+      'images' | 'files' | 'videos' | 'audios'
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -671,8 +670,7 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
         };
       }>;
     banner_background: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
+      'images' | 'files' | 'videos' | 'audios'
     > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -757,6 +755,15 @@ export interface ApiHomeHome extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::home.home'>;
+    partner_logos: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     project_section_button_label: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
