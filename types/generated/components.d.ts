@@ -18,6 +18,7 @@ export interface SharedInnerBanner extends Struct.ComponentSchema {
     displayName: 'Inner banner';
   };
   attributes: {
+    banner_bg: Schema.Attribute.Media<'images' | 'videos'>;
     banner_label: Schema.Attribute.String;
     banner_title: Schema.Attribute.String;
   };

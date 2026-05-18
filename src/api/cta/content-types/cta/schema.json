@@ -22,12 +22,9 @@
           "localized": true
         }
       },
-      "multiple": true,
+      "multiple": false,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "videos"
       ]
     },
     "cta_section_title": {
