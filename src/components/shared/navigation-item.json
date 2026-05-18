@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_navigation_items",
+  "info": {
+    "displayName": "Navigation item"
+  },
+  "options": {},
+  "attributes": {
+    "nav_label": {
+      "type": "string",
+      "required": true
+    },
+    "is_parent": {
+      "type": "boolean",
+      "required": true,
+      "default": true
+    },
+    "mega_menu_left_info": {
+      "type": "component",
+      "component": "shared.nav-info-card",
+      "repeatable": false
+    },
+    "mega_menu_links": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    },
+    "mega_menu_right_info": {
+      "type": "component",
+      "component": "shared.nav-info-card",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}
