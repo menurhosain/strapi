@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_news_cards",
+  "info": {
+    "displayName": "news-card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "link_label": {
+      "type": "string",
+      "required": true
+    },
+    "link_href": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

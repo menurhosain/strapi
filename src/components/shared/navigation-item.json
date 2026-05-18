@@ -28,6 +28,11 @@
       "type": "component",
       "component": "shared.nav-info-card",
       "repeatable": false
+    },
+    "featured_news": {
+      "type": "component",
+      "component": "shared.news-card",
+      "repeatable": true
     }
   },
   "config": {}
