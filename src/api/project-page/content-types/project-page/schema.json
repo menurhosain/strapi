@@ -98,6 +98,24 @@
       },
       "default": "Apply Filters"
     },
+    "project_card_year_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Year"
+    },
+    "project_card_location_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Location"
+    },
     "pagination_next_label": {
       "type": "string",
       "pluginOptions": {
@@ -116,23 +134,23 @@
       },
       "default": "Previous"
     },
-    "project_card_year_label": {
+    "no_project_label": {
       "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "default": "Year"
+      "default": "No projects found."
     },
-    "project_card_location_label": {
-      "type": "string",
+    "no_project_description": {
+      "type": "text",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "default": "Location"
+      "default": "Try narrowing your search or adjusting the filters."
     }
   }
 }
