@@ -314,6 +314,14 @@
         "videos",
         "audios"
       ]
+    },
+    "blog_section_description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
