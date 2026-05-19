@@ -31,6 +31,22 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "testimonial_bg": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "testimonial_quote": {
+      "type": "text"
+    },
+    "testimonial_author_name": {
+      "type": "string"
+    },
+    "testimonial_author_role": {
+      "type": "string"
     }
   }
 }
