@@ -1,0 +1,111 @@
+{
+  "kind": "singleType",
+  "collectionName": "service_detail",
+  "info": {
+    "singularName": "service-details",
+    "pluralName": "service-details-pages",
+    "displayName": "Service details"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "Banner": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.inner-banner",
+      "repeatable": false
+    },
+    "service_detail_title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "service_detail_description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "service_detail_benefits_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Benefits"
+    },
+    "service_detail_benefits": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.service-benefit",
+      "repeatable": true
+    },
+    "team_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    },
+    "our_value_heading": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Our Values"
+    },
+    "our_value_bg": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "our_value_items": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.value-item",
+      "repeatable": true
+    },
+    "service_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    }
+  }
+}
