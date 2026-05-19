@@ -309,10 +309,7 @@
       },
       "multiple": true,
       "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
+        "images"
       ]
     },
     "blog_section_description": {
