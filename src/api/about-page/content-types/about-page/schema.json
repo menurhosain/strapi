@@ -95,6 +95,36 @@
         }
       },
       "default": "2024"
+    },
+    "why_choose_section": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    },
+    "why_choose_cards": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.choose-card",
+      "repeatable": true
+    },
+    "why_choose_image_cards": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "component": "shared.choose-image-card",
+      "repeatable": true
     }
   }
 }

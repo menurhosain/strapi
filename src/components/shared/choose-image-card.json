@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_choose_image_cards",
+  "info": {
+    "displayName": "Choose Image Card"
+  },
+  "options": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "alt": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

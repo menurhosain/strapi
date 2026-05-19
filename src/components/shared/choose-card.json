@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_choose_cards",
+  "info": {
+    "displayName": "Choose Card"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "text"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
