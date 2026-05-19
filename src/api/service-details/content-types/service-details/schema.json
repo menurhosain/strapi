@@ -83,7 +83,9 @@
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "our_value_items": {
       "type": "component",
@@ -94,6 +96,16 @@
       },
       "component": "shared.value-item",
       "repeatable": true
+    },
+    "service_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
     }
   }
 }
