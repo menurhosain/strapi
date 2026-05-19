@@ -15,37 +15,65 @@
     }
   },
   "attributes": {
-    "cta_background": {
-      "type": "media",
+    "title": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "button_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "button_link": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "map_image": {
+      "type": "media",
       "multiple": false,
       "allowedTypes": [
-        "videos"
-      ]
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
-    "cta_section_title": {
-      "type": "component",
+    "legend_one": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "component": "shared.section-title",
-      "repeatable": false
+      }
     },
-    "cta_button": {
-      "type": "component",
+    "legend_two": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "component": "shared.button",
-      "repeatable": false
+      }
     }
   }
 }
