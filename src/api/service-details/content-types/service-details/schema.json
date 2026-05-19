@@ -69,6 +69,31 @@
       },
       "component": "shared.section-title",
       "repeatable": false
+    },
+    "our_value_heading": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "Our Values"
+    },
+    "our_value_bg": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "our_value_items": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.value-item",
+      "repeatable": true
     }
   }
 }
