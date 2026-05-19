@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_service_benefits",
+  "info": {
+    "displayName": "Service Benefit"
+  },
+  "options": {},
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
