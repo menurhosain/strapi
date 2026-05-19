@@ -125,6 +125,16 @@
       },
       "component": "shared.choose-image-card",
       "repeatable": true
+    },
+    "service_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
     }
   }
 }
