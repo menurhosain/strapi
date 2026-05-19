@@ -1,0 +1,51 @@
+{
+  "kind": "singleType",
+  "collectionName": "career_ctas",
+  "info": {
+    "singularName": "career-cta",
+    "pluralName": "career-ctas",
+    "displayName": "Career CTA"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "career_cta_background": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "videos"
+      ]
+    },
+    "career_cta_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    },
+    "career_cta_button": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.button",
+      "repeatable": false
+    }
+  }
+}
