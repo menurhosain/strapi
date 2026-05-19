@@ -34,6 +34,24 @@
       },
       "component": "shared.executive-leader",
       "repeatable": false
+    },
+    "senior_leadership": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.senior-leader",
+      "repeatable": true
+    },
+    "senior_leadership_section_title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

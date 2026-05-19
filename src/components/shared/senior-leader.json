@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_senior_leaders",
+  "info": {
+    "displayName": "Senior Leader"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
