@@ -97,6 +97,28 @@
       "component": "shared.value-item",
       "repeatable": true
     },
+    "approach_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    },
+    "approach_section_image": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "service_section_title": {
       "type": "component",
       "pluginOptions": {
