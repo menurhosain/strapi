@@ -59,6 +59,16 @@
       },
       "component": "shared.service-benefit",
       "repeatable": true
+    },
+    "team_section_title": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
     }
   }
 }
