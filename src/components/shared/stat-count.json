@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_stat_counts",
+  "info": {
+    "displayName": "Stat count"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "suffix": {
+      "type": "string"
+    },
+    "target_count": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
