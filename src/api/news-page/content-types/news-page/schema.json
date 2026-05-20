@@ -24,6 +24,10 @@
       },
       "component": "shared.inner-banner",
       "repeatable": false
+    },
+    "post_per_page": {
+      "type": "integer",
+      "default": 6
     }
   }
 }
