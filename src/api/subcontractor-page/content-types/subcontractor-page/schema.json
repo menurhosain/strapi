@@ -1,0 +1,69 @@
+{
+  "kind": "singleType",
+  "collectionName": "subcontractor_page",
+  "info": {
+    "singularName": "subcontractor-page",
+    "pluralName": "subcontractor-pages",
+    "displayName": "Subcontractor Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "component": "shared.inner-banner",
+      "repeatable": false
+    },
+    "intro_title_normal": {
+      "type": "string"
+    },
+    "intro_title_animated": {
+      "type": "string"
+    },
+    "intro_description": {
+      "type": "text"
+    },
+    "hero_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "icon_box": {
+      "type": "component",
+      "component": "shared.icon-box",
+      "repeatable": true
+    },
+    "policies_title": {
+      "type": "string"
+    },
+    "policies_description": {
+      "type": "text"
+    },
+    "policy_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "policy_description": {
+      "type": "text"
+    },
+    "policy_button_1_label": {
+      "type": "string"
+    },
+    "policy_button_1_link": {
+      "type": "string"
+    },
+    "policy_button_2_label": {
+      "type": "string"
+    },
+    "policy_button_2_link": {
+      "type": "string"
+    }
+  }
+}
