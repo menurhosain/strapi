@@ -1,0 +1,67 @@
+{
+  "kind": "singleType",
+  "collectionName": "offcanvas",
+  "info": {
+    "singularName": "offcanvas",
+    "pluralName": "offcanvases",
+    "displayName": "Offcanvas"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "vertical_text": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "search_placeholder": {
+      "type": "string"
+    },
+    "menu_button": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": false
+    },
+    "social_links": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    },
+    "contact_us_label": {
+      "type": "string"
+    },
+    "contact_us_link": {
+      "type": "string"
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "placeholder_first_name": {
+      "type": "string"
+    },
+    "placeholder_last_name": {
+      "type": "string"
+    },
+    "placeholder_email": {
+      "type": "string"
+    },
+    "placeholder_phone": {
+      "type": "string"
+    },
+    "placeholder_message": {
+      "type": "string"
+    },
+    "form_submit_label": {
+      "type": "string"
+    },
+    "view_all_projects_label": {
+      "type": "string"
+    },
+    "view_all_projects_link": {
+      "type": "string"
+    }
+  }
+}
