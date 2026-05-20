@@ -9,6 +9,10 @@
       "type": "string",
       "required": true
     },
+    "root_link": {
+      "type": "string",
+      "default": "#"
+    },
     "is_parent": {
       "type": "boolean",
       "required": true,
