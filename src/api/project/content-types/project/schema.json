@@ -24,6 +24,16 @@
       },
       "required": true
     },
+    "slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "targetField": "title",
+      "required": true
+    },
     "excerpt": {
       "type": "text",
       "pluginOptions": {
@@ -111,6 +121,16 @@
         }
       }
     },
+    "highlited_lists": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.text",
+      "repeatable": true
+    },
     "scopes": {
       "type": "relation",
       "relation": "manyToMany",
@@ -125,6 +145,14 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::location.location"
+    },
+    "end_content": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
