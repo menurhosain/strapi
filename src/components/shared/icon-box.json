@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_icon_boxes",
+  "info": {
+    "displayName": "Icon Box"
+  },
+  "options": {},
+  "attributes": {
+    "Icon": {
+      "type": "text"
+    },
+    "Title": {
+      "type": "string"
+    },
+    "Link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

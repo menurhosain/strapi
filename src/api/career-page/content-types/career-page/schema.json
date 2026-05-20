@@ -1,0 +1,72 @@
+{
+  "kind": "singleType",
+  "collectionName": "career_page",
+  "info": {
+    "singularName": "career-page",
+    "pluralName": "career-pages",
+    "displayName": "Career Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "component": "shared.inner-banner",
+      "repeatable": false
+    },
+    "section_title": {
+      "type": "string"
+    },
+    "section_description": {
+      "type": "text"
+    },
+    "section_button_label": {
+      "type": "string"
+    },
+    "section_button_link": {
+      "type": "string"
+    },
+    "image_1": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "image_2": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "map_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "map_legend_1": {
+      "type": "string"
+    },
+    "map_legend_2": {
+      "type": "string"
+    },
+    "job_section_title": {
+      "type": "string"
+    },
+    "job_section_description": {
+      "type": "text"
+    },
+    "job_board_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
