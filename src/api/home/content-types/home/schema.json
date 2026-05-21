@@ -24,14 +24,15 @@
       },
       "required": true
     },
-    "banner_title_fancy": {
-      "type": "string",
+    "banner_typewriter_texts": {
+      "type": "component",
+      "component": "shared.typewriter-item",
+      "repeatable": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      },
-      "required": true
+      }
     },
     "banner_button_label": {
       "type": "string",
