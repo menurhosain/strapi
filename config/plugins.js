@@ -19,7 +19,7 @@ module.exports = () => ({
   },
   upload: {
     config: {
-      sizeLimit: 20 * 1024 * 1024, //5mb
+      sizeLimit: 20 * 1024 * 1024, //20mb
     },
     security: {
       allowedTypes: ["images"],
