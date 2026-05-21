@@ -58,6 +58,22 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "recaptcha_site_key": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "recaptcha_secret_key": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     }
   }
 }
