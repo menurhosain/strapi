@@ -1,4 +1,20 @@
-const config = {};
+const config = {
+  head: {
+    title: "SAH Admin",
+  },
+  auth: {
+    logo: "/favicon.png",
+  },
+  menu: {
+    logo: "/favicon.png",
+  },
+  translations: {
+    en: {
+      "Auth.form.welcome.title": "Welcome to SAH Admin!",
+      "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
+    },
+  },
+};
 
 const bootstrap = (app) => {
   injectGoogleLogin();
