@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_typewriter_items",
+  "info": {
+    "displayName": "Typewriter Item",
+    "icon": "feather",
+    "description": "A single text entry for the typewriter animation"
+  },
+  "options": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "text": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}
