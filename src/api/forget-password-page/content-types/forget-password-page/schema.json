@@ -1,0 +1,53 @@
+{
+  "kind": "singleType",
+  "collectionName": "forget_password_page",
+  "info": {
+    "singularName": "forget-password-page",
+    "pluralName": "forget-password-pages",
+    "displayName": "Forget Password Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "component": "shared.inner-banner",
+      "repeatable": false
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "form_description": {
+      "type": "string"
+    },
+    "email_label": {
+      "type": "string"
+    },
+    "email_placeholder": {
+      "type": "string"
+    },
+    "submit_button_label": {
+      "type": "string"
+    },
+    "submitting_label": {
+      "type": "string"
+    },
+    "success_title": {
+      "type": "string"
+    },
+    "success_description": {
+      "type": "string"
+    },
+    "back_to_login_text": {
+      "type": "string"
+    },
+    "back_to_login_link_label": {
+      "type": "string"
+    },
+    "back_to_login_link": {
+      "type": "string"
+    }
+  }
+}

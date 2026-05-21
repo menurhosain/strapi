@@ -1,0 +1,71 @@
+{
+  "kind": "singleType",
+  "collectionName": "register_applicant_page",
+  "info": {
+    "singularName": "register-applicant-page",
+    "pluralName": "register-applicant-pages",
+    "displayName": "Register Applicant Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "component": "shared.inner-banner",
+      "repeatable": false
+    },
+    "form_title": {
+      "type": "string"
+    },
+    "first_name_label": {
+      "type": "string"
+    },
+    "last_name_label": {
+      "type": "string"
+    },
+    "email_label": {
+      "type": "string"
+    },
+    "username_label": {
+      "type": "string"
+    },
+    "password_label": {
+      "type": "string"
+    },
+    "confirm_password_label": {
+      "type": "string"
+    },
+    "phone_label": {
+      "type": "string"
+    },
+    "location_label": {
+      "type": "string"
+    },
+    "first_name_placeholder": {
+      "type": "string"
+    },
+    "last_name_placeholder": {
+      "type": "string"
+    },
+    "email_placeholder": {
+      "type": "string"
+    },
+    "username_placeholder": {
+      "type": "string"
+    },
+    "phone_placeholder": {
+      "type": "string"
+    },
+    "location_placeholder": {
+      "type": "string"
+    },
+    "submit_button_label": {
+      "type": "string"
+    },
+    "submitting_label": {
+      "type": "string"
+    }
+  }
+}
