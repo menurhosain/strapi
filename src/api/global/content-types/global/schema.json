@@ -25,6 +25,15 @@
       },
       "required": true
     },
+    "siteDescription": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
     "favicon": {
       "type": "media",
       "pluginOptions": {
@@ -40,24 +49,31 @@
         "videos"
       ]
     },
-    "siteDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "required": true
-    },
-    "defaultSeo": {
-      "type": "component",
+    "light_logo": {
+      "type": "media",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       },
-      "component": "shared.seo",
-      "repeatable": false
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "dark_logo": {
+      "type": "media",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "recaptcha_site_key": {
       "type": "string",
