@@ -33,7 +33,9 @@ module.exports = {
     });
 
     if (!adminUser) {
-      return ctx.unauthorized("No admin account is associated with this Google account.");
+      return ctx.unauthorized(
+        "No admin account is associated with this Google account.",
+      );
     }
 
     if (!adminUser.isActive) {
