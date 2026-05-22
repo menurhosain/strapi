@@ -23,9 +23,9 @@
       "component": "shared.nav-info-card",
       "repeatable": false
     },
-    "mega_menu_links": {
+    "mega_menu_link_groups": {
       "type": "component",
-      "component": "shared.button",
+      "component": "shared.nav-link-group",
       "repeatable": true
     },
     "mega_menu_right_info": {

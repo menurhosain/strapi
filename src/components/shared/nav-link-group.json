@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_nav_link_groups",
+  "info": {
+    "displayName": "Nav Link Group",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "group_label": {
+      "type": "string",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "component": "shared.button",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
