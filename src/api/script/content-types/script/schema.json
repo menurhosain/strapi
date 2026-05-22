@@ -14,15 +14,20 @@
     "name": {
       "type": "string"
     },
-    "script": {
+    "src": {
+      "type": "string"
+    },
+    "content": {
       "type": "text"
     },
-    "place": {
+    "strategy": {
       "type": "enumeration",
       "enum": [
-        "Header",
-        "Footer"
-      ]
+        "beforeInteractive",
+        "afterInteractive",
+        "lazyOnload"
+      ],
+      "default": "afterInteractive"
     }
   }
 }
