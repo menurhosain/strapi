@@ -50,16 +50,6 @@
       },
       "default": "Benefits"
     },
-    "service_detail_benefits": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "shared.service-benefit",
-      "repeatable": true
-    },
     "team_section_title": {
       "type": "component",
       "pluginOptions": {
@@ -129,11 +119,18 @@
       "component": "shared.section-title",
       "repeatable": false
     },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
     "feature_section_bg": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "feature_items": {
       "type": "component",

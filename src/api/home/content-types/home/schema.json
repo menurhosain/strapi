@@ -26,13 +26,13 @@
     },
     "banner_typewriter_texts": {
       "type": "component",
-      "component": "shared.typewriter-item",
-      "repeatable": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shared.typewriter-item",
+      "repeatable": true
     },
     "banner_button_label": {
       "type": "string",
@@ -320,6 +320,11 @@
           "localized": true
         }
       }
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
     }
   }
 }

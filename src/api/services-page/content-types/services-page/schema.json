@@ -17,33 +17,38 @@
   "attributes": {
     "banner": {
       "type": "component",
-      "component": "shared.inner-banner",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shared.inner-banner",
+      "repeatable": false
     },
     "service_section_title": {
       "type": "component",
-      "component": "shared.section-title",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
     },
     "faq_section_title": {
       "type": "component",
-      "component": "shared.section-title",
-      "repeatable": false,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shared.section-title",
+      "repeatable": false
     }
   }
 }

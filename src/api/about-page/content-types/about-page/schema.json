@@ -135,6 +135,11 @@
       },
       "component": "shared.section-title",
       "repeatable": false
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
     }
   }
 }
