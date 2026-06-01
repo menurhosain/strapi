@@ -15,14 +15,6 @@
     }
   },
   "attributes": {
-    "svg": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "title": {
       "type": "string",
       "pluginOptions": {
@@ -32,8 +24,34 @@
       },
       "required": true
     },
+    "slug": {
+      "type": "uid",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "targetField": "title",
+      "required": true
+    },
+    "svg": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "description": {
       "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "content": {
+      "type": "blocks",
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -59,24 +77,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "content": {
-      "type": "richtext",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "slug": {
-      "type": "uid",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "targetField": "title",
-      "required": true
     },
     "benefits": {
       "type": "component",
