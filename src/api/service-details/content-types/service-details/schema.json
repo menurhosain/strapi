@@ -119,6 +119,16 @@
       "component": "shared.section-title",
       "repeatable": false
     },
+    "teams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team.team",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "services": {
       "type": "relation",
       "relation": "oneToMany",
