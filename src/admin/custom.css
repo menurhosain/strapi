@@ -1,0 +1,35 @@
+/* SAH Admin — custom styles */
+
+/* Top navigation bar links */
+nav a *,
+nav button {
+  font-size: 16px !important;
+}
+
+.dzFGjH {
+  font-size: 16px !important;
+}
+
+/* Main nav bar brand/title */
+header [class*="NavBrand"] {
+  font-size: 14px !important;
+}
+
+/* Nav section headers (e.g. "Content Manager", "Media Library") */
+nav [class*="SubNavHeader"],
+nav [class*="NavSectionLabel"] {
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+}
+
+/* Left sidebar nav item labels */
+nav [class*="NavLink"] span,
+nav [class*="SubNavLink"] span {
+  font-size: 13px !important;
+}
+
+/* Top bar user name / environment label */
+header [class*="TopNavUser"],
+header [class*="BadgeLabel"] {
+  font-size: 12px !important;
+}

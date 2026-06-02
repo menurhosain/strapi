@@ -1,3 +1,5 @@
+import "./custom.css";
+
 const config = {
   head: {
     title: "SAH Admin",
