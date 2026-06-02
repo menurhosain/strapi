@@ -10,6 +10,10 @@ nav button {
   font-size: 16px !important;
 }
 
+.fUIgBA {
+  font-size: 20px !important;
+}
+
 /* Main nav bar brand/title */
 header [class*="NavBrand"] {
   font-size: 14px !important;
