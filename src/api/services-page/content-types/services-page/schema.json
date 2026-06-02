@@ -38,7 +38,12 @@
     "services": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::service.service"
+      "target": "api::service.service",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "faq_section_title": {
       "type": "component",
