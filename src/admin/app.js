@@ -94,9 +94,11 @@ async function handleCredentialResponse(googleResponse) {
 
     const { token } = json.data;
 
-    // Strapi v5 admin reads token from both localStorage and cookie
+    // Strapi v5 reads the access token from localStorage as a JSON-stringified
+    // string (getStoredToken does JSON.parse). The refresh cookie is already
+    // set server-side (httpOnly), so only the access token goes here.
+    localStorage.setItem("jwtToken", JSON.stringify(token));
     localStorage.setItem("isLoggedIn", "true");
-    document.cookie = `jwtToken=${token}; path=/; SameSite=Strict`;
     window.location.href = "/admin";
   } catch {
     alert("Network error during Google login. Please try again.");
