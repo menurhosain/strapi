@@ -1,0 +1,210 @@
+{
+  "kind": "singleType",
+  "collectionName": "apply_recrutement",
+  "info": {
+    "singularName": "apply-recrutement",
+    "pluralName": "apply-recrutements",
+    "displayName": "Apply Recrutement"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "displayName": "Banner",
+      "component": "shared.inner-banner",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "form_title": {
+      "type": "string",
+      "displayName": "Form Title",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "form_subtitle": {
+      "type": "string",
+      "displayName": "Form Subtitle",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_first_name": {
+      "type": "string",
+      "displayName": "Label — First Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_last_name": {
+      "type": "string",
+      "displayName": "Label — Last Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_email": {
+      "type": "string",
+      "displayName": "Label — Email",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_phone": {
+      "type": "string",
+      "displayName": "Label — Phone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_cv": {
+      "type": "string",
+      "displayName": "Label — CV / Resume",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_skills": {
+      "type": "string",
+      "displayName": "Label — Skills",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_experience_years": {
+      "type": "string",
+      "displayName": "Label — Years of Experience",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_location": {
+      "type": "string",
+      "displayName": "Label — Location",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_first_name": {
+      "type": "string",
+      "displayName": "Placeholder — First Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_last_name": {
+      "type": "string",
+      "displayName": "Placeholder — Last Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_email": {
+      "type": "string",
+      "displayName": "Placeholder — Email",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_phone": {
+      "type": "string",
+      "displayName": "Placeholder — Phone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_skills": {
+      "type": "string",
+      "displayName": "Placeholder — Skills",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_experience_years": {
+      "type": "string",
+      "displayName": "Placeholder — Years of Experience",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_location": {
+      "type": "string",
+      "displayName": "Placeholder — Location",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "submit_label": {
+      "type": "string",
+      "displayName": "Button — Submit Label",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "submitting_label": {
+      "type": "string",
+      "displayName": "Button — Submitting Label",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "success_message": {
+      "type": "string",
+      "displayName": "Success Message",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

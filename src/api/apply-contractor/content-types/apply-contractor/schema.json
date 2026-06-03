@@ -1,0 +1,174 @@
+{
+  "kind": "singleType",
+  "collectionName": "apply_contractor",
+  "info": {
+    "singularName": "apply-contractor",
+    "pluralName": "apply-contractors",
+    "displayName": "Apply Contractor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "displayName": "Banner",
+      "component": "shared.inner-banner",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "form_title": {
+      "type": "string",
+      "displayName": "Form Title",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "form_subtitle": {
+      "type": "string",
+      "displayName": "Form Subtitle",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_company_name": {
+      "type": "string",
+      "displayName": "Label — Company Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_email": {
+      "type": "string",
+      "displayName": "Label — Email",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_phone": {
+      "type": "string",
+      "displayName": "Label — Phone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_experience_years": {
+      "type": "string",
+      "displayName": "Label — Years of Experience",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_location": {
+      "type": "string",
+      "displayName": "Label — Location",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_documents": {
+      "type": "string",
+      "displayName": "Label — Documents",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_company_name": {
+      "type": "string",
+      "displayName": "Placeholder — Company Name",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_email": {
+      "type": "string",
+      "displayName": "Placeholder — Email",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_phone": {
+      "type": "string",
+      "displayName": "Placeholder — Phone",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_experience_years": {
+      "type": "string",
+      "displayName": "Placeholder — Years of Experience",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "placeholder_location": {
+      "type": "string",
+      "displayName": "Placeholder — Location",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "documents_hint": {
+      "type": "string",
+      "displayName": "Documents — Hint Text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "submit_label": {
+      "type": "string",
+      "displayName": "Button — Submit Label",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "submitting_label": {
+      "type": "string",
+      "displayName": "Button — Submitting Label",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}
