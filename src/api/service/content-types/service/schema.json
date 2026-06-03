@@ -25,20 +25,20 @@
       "required": true
     },
     "slug": {
-      "type": "uid",
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
       },
-      "targetField": "title",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "svg": {
       "type": "text",
       "pluginOptions": {
         "i18n": {
-          "localized": true
+          "localized": false
         }
       }
     },

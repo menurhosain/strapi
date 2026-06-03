@@ -20,6 +20,7 @@ const config = {
 
 const bootstrap = (app) => {
   injectGoogleLogin();
+  watchSlugAutoFill();
 };
 
 function injectGoogleLogin() {
@@ -100,6 +101,61 @@ async function handleCredentialResponse(googleResponse) {
   } catch {
     alert("Network error during Google login. Please try again.");
   }
+}
+
+function toSlug(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function setNativeValue(input, value) {
+  // Trigger React's synthetic event system
+  const setter = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    "value",
+  ).set;
+  setter.call(input, value);
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+function watchSlugAutoFill() {
+  let attached = false;
+
+  const observer = new MutationObserver(() => {
+    const isContentManager =
+      window.location.pathname.includes("/content-manager/");
+    if (!isContentManager) {
+      attached = false;
+      return;
+    }
+
+    const locale =
+      new URLSearchParams(window.location.search).get("locale") || "en";
+    if (locale !== "en") {
+      attached = false;
+      return;
+    }
+
+    // Some content types use "title", others use "name"
+    const titleInput =
+      document.querySelector('input[name="title"]') ||
+      document.querySelector('input[name="name"]');
+    const slugInput = document.querySelector('input[name="slug"]');
+    if (!titleInput || !slugInput || attached) return;
+
+    attached = true;
+    titleInput.addEventListener("input", () => {
+      // Only auto-fill when the slug is empty
+      if (slugInput.value) return;
+      setNativeValue(slugInput, toSlug(titleInput.value));
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 export default {

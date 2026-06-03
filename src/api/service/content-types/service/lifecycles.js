@@ -12,7 +12,7 @@ function toSlug(text) {
 }
 
 async function getDefaultSlug(documentId) {
-  const entry = await strapi.documents('api::news-item.news-item').findOne({
+  const entry = await strapi.documents('api::service.service').findOne({
     documentId,
     locale: DEFAULT_LOCALE,
     fields: ['slug'],
@@ -25,22 +25,16 @@ module.exports = {
     const { data } = event.params;
     const locale = data.locale ?? event.params.locale;
 
-    // Auto-fill author_name from admin user
-    const ctx = strapi.requestContext.get();
-    const user = ctx?.state?.user;
-    if (user && !data.author_name) {
-      const first = user.firstname ?? '';
-      const last = user.lastname ?? '';
-      data.author_name = `${first} ${last}`.trim();
-    }
-
     if (!locale || locale === DEFAULT_LOCALE) {
-      if (!data.slug && data.title) data.slug = toSlug(data.title);
+      if (!data.slug && data.title) {
+        data.slug = toSlug(data.title);
+      }
       return;
     }
 
     const documentId = data.documentId;
     if (!documentId) return;
+
     const slug = await getDefaultSlug(documentId);
     if (slug) data.slug = slug;
   },
@@ -48,10 +42,12 @@ module.exports = {
   async beforeUpdate(event) {
     const { data, where } = event.params;
     const locale = event.params.locale;
+
     if (!locale || locale === DEFAULT_LOCALE) return;
 
     const documentId = where?.documentId;
     if (!documentId) return;
+
     const slug = await getDefaultSlug(documentId);
     if (slug) data.slug = slug;
     else delete data.slug;

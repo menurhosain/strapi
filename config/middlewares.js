@@ -23,4 +23,8 @@ module.exports = [
   'strapi::favicon',
   'strapi::public',
   'global::swagger',
+  {
+    name: 'global::locale-fallback',
+    config: { defaultLocale: 'en' },
+  },
 ];
