@@ -1,0 +1,113 @@
+{
+  "kind": "singleType",
+  "collectionName": "dashboard_page",
+  "info": {
+    "singularName": "dashboard-page",
+    "pluralName": "dashboard-pages",
+    "displayName": "Dashboard Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "banner": {
+      "type": "component",
+      "component": "shared.inner-banner",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "welcome_greeting": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "account_summary_text": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "profile_card_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "profile_card_title": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "profile_card_description": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "applicant_section_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "applicant_apply_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "applicant_apply_description": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "contractor_section_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "contractor_apply_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "contractor_apply_description": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "account_details_heading": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "email_field_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "username_field_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "account_type_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "applications_heading": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "new_application_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "empty_state_text": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "empty_state_link_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "location_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "experience_label": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    }
+  }
+}
