@@ -1,33 +1,33 @@
 {
-  "kind": "collectionType",
-  "collectionName": "scripts",
-  "info": {
-    "singularName": "script",
-    "pluralName": "scripts",
-    "displayName": "script"
-  },
-  "options": {
-    "draftAndPublish": true
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "name": {
-      "type": "string"
-    },
-    "src": {
-      "type": "string"
-    },
-    "content": {
-      "type": "text"
-    },
-    "strategy": {
-      "type": "enumeration",
-      "enum": [
-        "beforeInteractive",
-        "afterInteractive",
-        "lazyOnload"
-      ],
-      "default": "afterInteractive"
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "scripts",
+	"info": {
+		"singularName": "script",
+		"pluralName": "scripts",
+		"displayName": "Add JS Code"
+	},
+	"options": {
+		"draftAndPublish": true
+	},
+	"pluginOptions": {},
+	"attributes": {
+		"name": {
+			"type": "string"
+		},
+		"src": {
+			"type": "string"
+		},
+		"content": {
+			"type": "text"
+		},
+		"strategy": {
+			"type": "enumeration",
+			"enum": [
+				"beforeInteractive",
+				"afterInteractive",
+				"lazyOnload"
+			],
+			"default": "afterInteractive"
+		}
+	}
 }

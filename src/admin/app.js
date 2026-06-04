@@ -14,6 +14,14 @@ const config = {
     en: {
       "Auth.form.welcome.title": "Welcome to SAH Admin!",
       "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
+      "content-manager.components.LeftMenu.collection-types": "Post Types",
+      "content-type-builder.menu.section.models.name": "Post Types",
+      "content-manager.components.LeftMenu.single-types": "All Pages",
+      "content-type-builder.menu.section.single-types.name": "All Pages",
+      // "menu.section.single-types.name": "All Pages",
+      // "global.content-manager": "Content",
+      // "Settings.collection-types": "Posts",
+      // "Settings.single-types": "All Pages",
     },
   },
 };
