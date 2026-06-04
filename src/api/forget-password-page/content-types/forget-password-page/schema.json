@@ -4,7 +4,7 @@
   "info": {
     "singularName": "forget-password-page",
     "pluralName": "forget-password-pages",
-    "displayName": "Forget Password Page"
+    "displayName": "Forget Password"
   },
   "options": {
     "draftAndPublish": true

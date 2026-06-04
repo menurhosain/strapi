@@ -4,7 +4,7 @@
   "info": {
     "singularName": "apply-contractor",
     "pluralName": "apply-contractors",
-    "displayName": "Apply Contractor"
+    "displayName": "Apply contractor"
   },
   "options": {
     "draftAndPublish": true

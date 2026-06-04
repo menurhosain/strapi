@@ -4,7 +4,7 @@
   "info": {
     "singularName": "offcanvas",
     "pluralName": "offcanvases",
-    "displayName": "Offcanvas"
+    "displayName": "Offcanvas menu"
   },
   "options": {
     "draftAndPublish": true

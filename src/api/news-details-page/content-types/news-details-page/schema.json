@@ -4,7 +4,7 @@
   "info": {
     "singularName": "news-details-page",
     "pluralName": "news-details-pages",
-    "displayName": "News Details Page"
+    "displayName": "News Details"
   },
   "options": {
     "draftAndPublish": true

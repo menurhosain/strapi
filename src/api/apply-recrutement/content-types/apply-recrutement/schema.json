@@ -4,7 +4,7 @@
   "info": {
     "singularName": "apply-recrutement",
     "pluralName": "apply-recrutements",
-    "displayName": "Apply Recrutement"
+    "displayName": "Apply recrutement"
   },
   "options": {
     "draftAndPublish": true

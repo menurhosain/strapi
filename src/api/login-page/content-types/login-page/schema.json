@@ -4,7 +4,7 @@
   "info": {
     "singularName": "login-page",
     "pluralName": "login-pages",
-    "displayName": "Login Page"
+    "displayName": "Login"
   },
   "options": {
     "draftAndPublish": true

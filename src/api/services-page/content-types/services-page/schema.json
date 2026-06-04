@@ -4,7 +4,7 @@
   "info": {
     "singularName": "services-page",
     "pluralName": "services-pages",
-    "displayName": "Services Page"
+    "displayName": "Services"
   },
   "options": {
     "draftAndPublish": true

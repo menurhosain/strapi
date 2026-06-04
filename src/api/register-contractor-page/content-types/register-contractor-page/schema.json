@@ -4,7 +4,7 @@
   "info": {
     "singularName": "register-contractor-page",
     "pluralName": "register-contractor-pages",
-    "displayName": "Register Contractor Page"
+    "displayName": "Register Contractor"
   },
   "options": {
     "draftAndPublish": true

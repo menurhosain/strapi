@@ -4,7 +4,7 @@
   "info": {
     "singularName": "dashboard-page",
     "pluralName": "dashboard-pages",
-    "displayName": "Dashboard Page"
+    "displayName": "Dashboard"
   },
   "options": {
     "draftAndPublish": true

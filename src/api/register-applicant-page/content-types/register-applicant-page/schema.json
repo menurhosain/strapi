@@ -4,7 +4,7 @@
   "info": {
     "singularName": "register-applicant-page",
     "pluralName": "register-applicant-pages",
-    "displayName": "Register Applicant Page"
+    "displayName": "Register Applicant"
   },
   "options": {
     "draftAndPublish": true
