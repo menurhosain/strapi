@@ -18,17 +18,37 @@ const config = {
       "content-type-builder.menu.section.models.name": "Post Types",
       "content-manager.components.LeftMenu.single-types": "All Pages",
       "content-type-builder.menu.section.single-types.name": "All Pages",
-      // "menu.section.single-types.name": "All Pages",
-      // "global.content-manager": "Content",
-      // "Settings.collection-types": "Posts",
-      // "Settings.single-types": "All Pages",
     },
   },
 };
 
+// Edit this array to control the order of collection types in the sidebar.
+// Use the Display Name of each collection exactly as shown in the admin.
+// Collections not listed here will appear after the ones listed, alphabetically.
+const COLLECTION_ORDER = [
+  "Applicant",
+  "Subcontractor",
+  "News",
+  "Project",
+  "Service",
+  "Team",
+  "Location",
+  "Industry",
+  "Tags",
+  "Contact",
+  "Pages",
+  "Job",
+  "Scope",
+  "Add CSS Code",
+  "Add JS Code",
+  "Newsletter subscriber",
+  "User",
+];
+
 const bootstrap = (app) => {
   injectGoogleLogin();
   watchSlugAutoFill();
+  watchSidebarOrder();
 };
 
 function injectGoogleLogin() {
@@ -166,6 +186,77 @@ function watchSlugAutoFill() {
   });
 
   observer.observe(document.body, { childList: true, subtree: true });
+}
+
+function watchSidebarOrder() {
+  let olObserver = null;
+
+  // Watches the body only until the ol is found, then switches to a targeted observer
+  const bodyObserver = new MutationObserver(() => {
+    const anchor =
+      document.querySelector('a[href*="/content-manager/collection-types/"]') ||
+      document.querySelector('a[href*="/content-type-builder/content-types/"]');
+    if (!anchor) return;
+    const ol = anchor.closest("ol");
+    if (!ol) return;
+
+    // Stop watching the whole body
+    bodyObserver.disconnect();
+
+    // Watch only the ol's direct children for reordering
+    olObserver = new MutationObserver(() => {
+      reorderCollectionSidebar();
+    });
+    olObserver.observe(ol, { childList: true });
+
+    reorderCollectionSidebar();
+
+    // When the ol is removed (page change), restart body watching
+    const removalObserver = new MutationObserver(() => {
+      if (!document.contains(ol)) {
+        removalObserver.disconnect();
+        olObserver.disconnect();
+        olObserver = null;
+        bodyObserver.observe(document.body, { childList: true, subtree: true });
+      }
+    });
+    removalObserver.observe(document.body, { childList: true, subtree: true });
+  });
+
+  bodyObserver.observe(document.body, { childList: true, subtree: true });
+}
+
+function reorderCollectionSidebar() {
+  const anchor =
+    document.querySelector('a[href*="/content-manager/collection-types/"]') ||
+    document.querySelector('a[href*="/content-type-builder/content-types/"]');
+  if (!anchor) return false;
+  const ol = anchor.closest("ol");
+  if (!ol) return false;
+
+  const items = Array.from(ol.children);
+  if (items.length === 0) return false;
+
+  const getLabel = (li) => {
+    const el = li.querySelector('[style*="text-overflow"]');
+    return el ? el.textContent.trim() : "";
+  };
+
+  const ordered = COLLECTION_ORDER.map((name) =>
+    items.find((li) => getLabel(li) === name),
+  ).filter(Boolean);
+
+  const rest = items.filter((li) => !COLLECTION_ORDER.includes(getLabel(li)));
+
+  const final = [...ordered, ...rest];
+
+  // Skip DOM writes if order already matches
+  const alreadySorted = final.every((li, i) => li === items[i]);
+  if (alreadySorted) return true;
+
+  final.forEach((li) => ol.appendChild(li));
+
+  return true;
 }
 
 export default {
