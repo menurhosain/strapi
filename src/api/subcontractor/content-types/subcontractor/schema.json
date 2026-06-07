@@ -64,8 +64,9 @@
     },
     "applied_job": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::job.job"
+      "relation": "manyToOne",
+      "target": "api::job.job",
+      "inversedBy": "subcontractors"
     }
   }
 }

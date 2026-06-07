@@ -83,6 +83,18 @@
           "localized": true
         }
       }
+    },
+    "applicants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::applicant.applicant",
+      "mappedBy": "applied_job"
+    },
+    "subcontractors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subcontractor.subcontractor",
+      "mappedBy": "applied_job"
     }
   }
 }
