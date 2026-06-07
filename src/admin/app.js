@@ -1,5 +1,3 @@
-import "./custom.css";
-
 const config = {
   head: {
     title: "SAH Admin",
@@ -80,10 +78,32 @@ const COLLECTION_SINGLE_REST_ORDER = [
 ];
 
 const bootstrap = (app) => {
+  injectCustomCSS();
   injectGoogleLogin();
   watchSlugAutoFill();
   watchSidebarOrder();
 };
+
+function injectCustomCSS() {
+  const style = document.createElement("style");
+  style.textContent = `
+    nav a *,
+    nav button {
+      font-size: 16px !important;
+    }
+    .dzFGjH {
+      font-size: 16px !important;
+    }
+    .fEpWbz {
+      font-size: 1.6rem !important;
+      color: #060608 !important;
+    }
+    .fUIgBA {
+      font-size: 20px !important;
+    }
+  `;
+  document.head.appendChild(style);
+}
 
 function injectGoogleLogin() {
   const script = document.createElement("script");
