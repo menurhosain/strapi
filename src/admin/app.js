@@ -45,6 +45,29 @@ const COLLECTION_ORDER = [
   "User",
 ];
 
+const COLLECTION_SINGLE_ORDER = [
+  "Home",
+  "About-us",
+  "Career",
+  "Contact",
+  "Become a subcontractor",
+  "Leadership",
+  "Partners",
+  "Projects",
+  "Project Detail",
+  "Services",
+  "Service Details",
+  "News",
+  "News Details",
+  "Register Contractor",
+  "Register Applicant",
+  "Login",
+  "Forget Password",
+  "Dashboard",
+  "Apply contractor",
+  "Apply recrutement",
+];
+
 const bootstrap = (app) => {
   injectGoogleLogin();
   watchSlugAutoFill();
@@ -188,75 +211,85 @@ function watchSlugAutoFill() {
   observer.observe(document.body, { childList: true, subtree: true });
 }
 
+const SIDEBAR_LISTS = [
+  {
+    selector:
+      'a[href*="/content-manager/collection-types/"], a[href*="/content-type-builder/content-types/"]',
+    order: COLLECTION_ORDER,
+  },
+  {
+    selector:
+      'a[href*="/content-manager/single-types/"], a[href*="/content-type-builder/content-types/api::about-page"]',
+    order: COLLECTION_SINGLE_ORDER,
+  },
+];
+
 function watchSidebarOrder() {
-  let olObserver = null;
+  const watchedOls = new Set();
+  let olObserver = new MutationObserver(() => reorderCollectionSidebar());
 
-  // Watches the body only until the ol is found, then switches to a targeted observer
   const bodyObserver = new MutationObserver(() => {
-    const anchor =
-      document.querySelector('a[href*="/content-manager/collection-types/"]') ||
-      document.querySelector('a[href*="/content-type-builder/content-types/"]');
-    if (!anchor) return;
-    const ol = anchor.closest("ol");
-    if (!ol) return;
+    let allFound = true;
 
-    // Stop watching the whole body
-    bodyObserver.disconnect();
-
-    // Watch only the ol's direct children for reordering
-    olObserver = new MutationObserver(() => {
-      reorderCollectionSidebar();
-    });
-    olObserver.observe(ol, { childList: true });
-
-    reorderCollectionSidebar();
-
-    // When the ol is removed (page change), restart body watching
-    const removalObserver = new MutationObserver(() => {
-      if (!document.contains(ol)) {
-        removalObserver.disconnect();
-        olObserver.disconnect();
-        olObserver = null;
-        bodyObserver.observe(document.body, { childList: true, subtree: true });
+    SIDEBAR_LISTS.forEach(({ selector }) => {
+      const anchor = document.querySelector(selector);
+      const ol = anchor?.closest("ol");
+      if (!ol) {
+        allFound = false;
+        return;
       }
+      if (watchedOls.has(ol)) return;
+      watchedOls.add(ol);
+      olObserver.observe(ol, { childList: true });
     });
-    removalObserver.observe(document.body, { childList: true, subtree: true });
+
+    if (watchedOls.size > 0) reorderCollectionSidebar();
+    if (allFound) bodyObserver.disconnect();
+  });
+
+  const removalObserver = new MutationObserver(() => {
+    for (const ol of watchedOls) {
+      if (!document.contains(ol)) {
+        olObserver.disconnect();
+        olObserver = new MutationObserver(() => reorderCollectionSidebar());
+        watchedOls.clear();
+        bodyObserver.observe(document.body, { childList: true, subtree: true });
+        break;
+      }
+    }
   });
 
   bodyObserver.observe(document.body, { childList: true, subtree: true });
+  removalObserver.observe(document.body, { childList: true, subtree: true });
 }
 
 function reorderCollectionSidebar() {
-  const anchor =
-    document.querySelector('a[href*="/content-manager/collection-types/"]') ||
-    document.querySelector('a[href*="/content-type-builder/content-types/"]');
-  if (!anchor) return false;
+  SIDEBAR_LISTS.forEach(({ selector, order }) => reorderOl(selector, order));
+}
+
+function reorderOl(selector, order) {
+  const anchor = document.querySelector(selector);
+  if (!anchor) return;
   const ol = anchor.closest("ol");
-  if (!ol) return false;
+  if (!ol) return;
 
   const items = Array.from(ol.children);
-  if (items.length === 0) return false;
+  if (items.length === 0) return;
 
   const getLabel = (li) => {
     const el = li.querySelector('[style*="text-overflow"]');
     return el ? el.textContent.trim() : "";
   };
 
-  const ordered = COLLECTION_ORDER.map((name) =>
-    items.find((li) => getLabel(li) === name),
-  ).filter(Boolean);
-
-  const rest = items.filter((li) => !COLLECTION_ORDER.includes(getLabel(li)));
-
+  const ordered = order
+    .map((name) => items.find((li) => getLabel(li) === name))
+    .filter(Boolean);
+  const rest = items.filter((li) => !order.includes(getLabel(li)));
   const final = [...ordered, ...rest];
 
-  // Skip DOM writes if order already matches
-  const alreadySorted = final.every((li, i) => li === items[i]);
-  if (alreadySorted) return true;
+  if (final.every((li, i) => li === items[i])) return;
 
   final.forEach((li) => ol.appendChild(li));
-
-  return true;
 }
 
 export default {

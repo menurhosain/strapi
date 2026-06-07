@@ -4,7 +4,7 @@
   "info": {
     "singularName": "service-details",
     "pluralName": "service-details-pages",
-    "displayName": "Service details"
+    "displayName": "Service Details"
   },
   "options": {
     "draftAndPublish": true
@@ -71,16 +71,16 @@
     },
     "our_value_bg": {
       "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ],
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "our_value_items": {
       "type": "component",
@@ -146,16 +146,16 @@
     },
     "feature_section_bg": {
       "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ],
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "feature_items": {
       "type": "component",

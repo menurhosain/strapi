@@ -270,7 +270,32 @@ module.exports = createCoreController(
         skills,
         experienceYears,
         location,
+        jobSlug,
       } = ctx.request.body.data ?? {};
+
+      // jobSlug is required
+      if (!jobSlug) {
+        return ctx.badRequest("A job must be selected to submit an application.");
+      }
+
+      const job = await strapi.db.query("api::job.job").findOne({ where: { slug: jobSlug } });
+
+      if (!job) {
+        return ctx.badRequest("Job not found.");
+      }
+
+      if (job.job_for !== "applicant") {
+        return ctx.badRequest("This job is not open for applicants.");
+      }
+
+      // Duplicate check: same user + same job
+      const existing = await strapi.db.query("api::applicant.applicant").findOne({
+        where: { user: { id: user.id }, applied_job: { id: job.id } },
+      });
+
+      if (existing) {
+        return ctx.badRequest("You have already applied for this job.");
+      }
 
       const entity = await strapi.entityService.create(
         "api::applicant.applicant",
@@ -286,6 +311,7 @@ module.exports = createCoreController(
             location,
             appliedAt: new Date(),
             user: user.id,
+            applied_job: job.id,
           },
         },
       );
