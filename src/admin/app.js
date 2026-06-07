@@ -68,6 +68,17 @@ const COLLECTION_SINGLE_ORDER = [
   "Apply recrutement",
 ];
 
+const COLLECTION_SINGLE_REST_ORDER = [
+  "Global",
+  "Mega menu",
+  "Offcanvas menu",
+  "CTA",
+  "Career CTA",
+  "FAQ",
+  "Voices of Experience",
+  "Footer",
+];
+
 const bootstrap = (app) => {
   injectGoogleLogin();
   watchSlugAutoFill();
@@ -221,6 +232,7 @@ const SIDEBAR_LISTS = [
     selector:
       'a[href*="/content-manager/single-types/"], a[href*="/content-type-builder/content-types/api::about-page"]',
     order: COLLECTION_SINGLE_ORDER,
+    restOrder: COLLECTION_SINGLE_REST_ORDER,
   },
 ];
 
@@ -241,6 +253,25 @@ function watchSidebarOrder() {
       if (watchedOls.has(ol)) return;
       watchedOls.add(ol);
       olObserver.observe(ol, { childList: true });
+      if (selector.includes("single-types")) {
+        const sibling = ol.previousElementSibling;
+        if (sibling) {
+          const clone = sibling.cloneNode(true);
+          const textNode = [...clone.querySelectorAll("*"), clone].find(
+            (el) =>
+              el.childNodes.length === 1 &&
+              el.childNodes[0].nodeType === Node.TEXT_NODE,
+          );
+          if (textNode) textNode.childNodes[0].nodeValue = "Reuse Sections";
+          const lastLabel = COLLECTION_SINGLE_ORDER.at(-1);
+          const lastLi = Array.from(ol.children).find((li) => {
+            const el = li.querySelector('[style*="text-overflow"]');
+            return el && el.textContent.trim() === lastLabel;
+          });
+          clone.style.padding = "20px 10px";
+          if (lastLi) lastLi.insertAdjacentElement("afterend", clone);
+        }
+      }
     });
 
     if (watchedOls.size > 0) reorderCollectionSidebar();
@@ -264,30 +295,33 @@ function watchSidebarOrder() {
 }
 
 function reorderCollectionSidebar() {
-  SIDEBAR_LISTS.forEach(({ selector, order }) => reorderOl(selector, order));
+  SIDEBAR_LISTS.forEach(({ selector, order, restOrder }) => reorderOl(selector, order, restOrder));
 }
 
-function reorderOl(selector, order) {
+function reorderOl(selector, order, restOrder = []) {
   const anchor = document.querySelector(selector);
   if (!anchor) return;
   const ol = anchor.closest("ol");
   if (!ol) return;
 
-  const items = Array.from(ol.children);
-  if (items.length === 0) return;
+  const allItems = Array.from(ol.children);
+  if (allItems.length === 0) return;
 
   const getLabel = (li) => {
     const el = li.querySelector('[style*="text-overflow"]');
     return el ? el.textContent.trim() : "";
   };
 
-  const ordered = order
-    .map((name) => items.find((li) => getLabel(li) === name))
-    .filter(Boolean);
-  const rest = items.filter((li) => !order.includes(getLabel(li)));
-  const final = [...ordered, ...rest];
+  const linkItems = allItems.filter((li) => li.querySelector("a"));
+  const separators = allItems.filter((li) => !li.querySelector("a"));
 
-  if (final.every((li, i) => li === items[i])) return;
+  const ordered = order.map((name) => linkItems.find((li) => getLabel(li) === name)).filter(Boolean);
+  const unordered = linkItems.filter((li) => !order.includes(getLabel(li)));
+  const restOrdered = restOrder.map((name) => unordered.find((li) => getLabel(li) === name)).filter(Boolean);
+  const remaining = unordered.filter((li) => !restOrder.includes(getLabel(li)));
+  const final = [...ordered, ...separators, ...restOrdered, ...remaining];
+
+  if (final.every((li, i) => li === allItems[i])) return;
 
   final.forEach((li) => ol.appendChild(li));
 }
