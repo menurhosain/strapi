@@ -75,6 +75,14 @@
           "localized": true
         }
       }
+    },
+    "employment_status": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }
