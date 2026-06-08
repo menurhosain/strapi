@@ -36,6 +36,7 @@ const COLLECTION_ORDER = [
   "Contact",
   "Pages",
   "Job",
+  "Subcontracted",
   "Scope",
   "Add CSS Code",
   "Add JS Code",
@@ -315,7 +316,9 @@ function watchSidebarOrder() {
 }
 
 function reorderCollectionSidebar() {
-  SIDEBAR_LISTS.forEach(({ selector, order, restOrder }) => reorderOl(selector, order, restOrder));
+  SIDEBAR_LISTS.forEach(({ selector, order, restOrder }) =>
+    reorderOl(selector, order, restOrder),
+  );
 }
 
 function reorderOl(selector, order, restOrder = []) {
@@ -335,9 +338,13 @@ function reorderOl(selector, order, restOrder = []) {
   const linkItems = allItems.filter((li) => li.querySelector("a"));
   const separators = allItems.filter((li) => !li.querySelector("a"));
 
-  const ordered = order.map((name) => linkItems.find((li) => getLabel(li) === name)).filter(Boolean);
+  const ordered = order
+    .map((name) => linkItems.find((li) => getLabel(li) === name))
+    .filter(Boolean);
   const unordered = linkItems.filter((li) => !order.includes(getLabel(li)));
-  const restOrdered = restOrder.map((name) => unordered.find((li) => getLabel(li) === name)).filter(Boolean);
+  const restOrdered = restOrder
+    .map((name) => unordered.find((li) => getLabel(li) === name))
+    .filter(Boolean);
   const remaining = unordered.filter((li) => !restOrder.includes(getLabel(li)));
   const final = [...ordered, ...separators, ...restOrdered, ...remaining];
 
