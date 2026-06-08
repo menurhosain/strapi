@@ -242,30 +242,12 @@ function sanitize(entity) {
   return result;
 }
 
-async function assertContractor(ctx, strapi) {
-  const user = ctx.state.user;
-
-  if (!user) {
-    return ctx.unauthorized("Login required");
-  }
-
-  const fullUser = await strapi.db
-    .query("plugin::users-permissions.user")
-    .findOne({ where: { id: user.id }, populate: ["role"] });
-
-  if (!fullUser?.role || fullUser.role.type !== "contractor") {
-    return ctx.forbidden("Only contractors can access this resource");
-  }
-
-  return user;
-}
-
 module.exports = createCoreController(
   "api::subcontractor.subcontractor",
   ({ strapi }) => ({
     async create(ctx) {
-      const user = await assertContractor(ctx, strapi);
-      if (!user) return;
+      const user = ctx.state.user;
+      if (!user) return ctx.unauthorized("Login required");
 
       const {
         companyName,
@@ -274,7 +256,35 @@ module.exports = createCoreController(
         documents,
         experienceYears,
         location,
+        subcontractedSlug,
       } = ctx.request.body.data ?? {};
+
+      let subcontractedId = null;
+
+      if (subcontractedSlug) {
+        const subcontracted = await strapi.db
+          .query("api::subcontracted.subcontracted")
+          .findOne({ where: { slug: subcontractedSlug } });
+
+        if (!subcontracted) {
+          return ctx.badRequest("Subcontracted project not found.");
+        }
+
+        const existing = await strapi.db
+          .query("api::subcontractor.subcontractor")
+          .findOne({
+            where: {
+              user: { id: user.id },
+              applied_subcontracted: { id: subcontracted.id },
+            },
+          });
+
+        if (existing) {
+          return ctx.badRequest("You have already applied for this project.");
+        }
+
+        subcontractedId = subcontracted.id;
+      }
 
       const entity = await strapi.entityService.create(
         "api::subcontractor.subcontractor",
@@ -288,6 +298,7 @@ module.exports = createCoreController(
             location,
             appliedAt: new Date(),
             user: user.id,
+            ...(subcontractedId && { applied_subcontracted: subcontractedId }),
           },
         },
       );
@@ -296,8 +307,8 @@ module.exports = createCoreController(
     },
 
     async find(ctx) {
-      const user = await assertContractor(ctx, strapi);
-      if (!user) return;
+      const user = ctx.state.user;
+      if (!user) return ctx.unauthorized("Login required");
 
       const { query } = ctx;
 
@@ -317,8 +328,8 @@ module.exports = createCoreController(
     },
 
     async findOne(ctx) {
-      const user = await assertContractor(ctx, strapi);
-      if (!user) return;
+      const user = ctx.state.user;
+      if (!user) return ctx.unauthorized("Login required");
 
       const { id } = ctx.params;
 
