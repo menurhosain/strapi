@@ -73,8 +73,7 @@
     "applied_job": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::job.job",
-      "inversedBy": "applicants"
+      "target": "api::job.job"
     }
   }
 }

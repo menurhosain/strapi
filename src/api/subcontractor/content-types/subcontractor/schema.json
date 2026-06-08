@@ -61,12 +61,6 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user"
-    },
-    "applied_job": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::job.job",
-      "inversedBy": "subcontractors"
     }
   }
 }

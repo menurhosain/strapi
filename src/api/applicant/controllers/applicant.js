@@ -390,11 +390,15 @@ module.exports = createCoreController(
         return ctx.forbidden("You can only view your own applicants");
       }
 
-      const response = await super.findOne(ctx);
-      if (response?.data) {
-        response.data = sanitize(response.data);
-      }
-      return response;
+      const data = await strapi.entityService.findOne(
+        "api::applicant.applicant",
+        entity.id,
+        ctx.query
+      );
+
+      if (!data) return ctx.notFound("Applicant not found");
+
+      return this.transformResponse(sanitize(data));
     },
 
     async delete(ctx) {
