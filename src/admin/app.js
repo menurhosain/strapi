@@ -12,8 +12,8 @@ const config = {
     en: {
       "Auth.form.welcome.title": "Welcome to SAH Admin!",
       "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
-      "content-manager.components.LeftMenu.collection-types": "Post Types",
-      "content-type-builder.menu.section.models.name": "Post Types",
+      "content-manager.components.LeftMenu.collection-types": "Jobs Portal",
+      "content-type-builder.menu.section.models.name": "Jobs Portal",
       "content-manager.components.LeftMenu.single-types": "All Pages",
       "content-type-builder.menu.section.single-types.name": "All Pages",
     },
@@ -23,58 +23,20 @@ const config = {
 // Edit this array to control the order of collection types in the sidebar.
 // Use the Display Name of each collection exactly as shown in the admin.
 // Collections not listed here will appear after the ones listed, alphabetically.
-const COLLECTION_ORDER = [
-  "Applicant",
-  "Subcontractor",
-  "News",
-  "Project",
-  "Service",
-  "Team",
-  "Location",
-  "Industry",
-  "Tags",
-  "Contact",
-  "Pages",
-  "Job",
-  "Subcontracted",
-  "Scope",
-  "Add CSS Code",
-  "Add JS Code",
-  "Newsletter subscriber",
-  "User",
-];
+const COLLECTION_ORDER = ["Applicant", "Jobs", "Location", "User"];
 
 const COLLECTION_SINGLE_ORDER = [
-  "Home",
-  "About-us",
-  "Career",
-  "Contact",
-  "Become a subcontractor",
-  "Leadership",
-  "Partners",
-  "Projects",
-  "Project Detail",
-  "Services",
-  "Service Details",
-  "News",
-  "News Details",
-  "Register Contractor",
+  "Dashboard",
   "Register Applicant",
+  "Apply Applicant",
   "Login",
   "Forget Password",
-  "Dashboard",
-  "Apply contractor",
-  "Apply recrutement",
 ];
 
 const COLLECTION_SINGLE_REST_ORDER = [
   "Global",
   "Mega menu",
   "Offcanvas menu",
-  "CTA",
-  "Career CTA",
-  "FAQ",
-  "Voices of Experience",
   "Footer",
 ];
 
