@@ -284,10 +284,6 @@ module.exports = createCoreController(
         return ctx.badRequest("Job not found.");
       }
 
-      if (job.job_for !== "applicant") {
-        return ctx.badRequest("This job is not open for applicants.");
-      }
-
       // Duplicate check: same user + same job
       const existing = await strapi.db.query("api::applicant.applicant").findOne({
         where: { user: { id: user.id }, applied_job: { id: job.id } },

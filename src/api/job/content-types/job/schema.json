@@ -55,19 +55,6 @@
         }
       }
     },
-    "job_for": {
-      "type": "enumeration",
-      "pluginOptions": {
-        "i18n": {
-          "localized": false
-        }
-      },
-      "default": "subcontractor",
-      "enum": [
-        "applicant",
-        "subcontractor"
-      ]
-    },
     "details": {
       "type": "blocks",
       "pluginOptions": {
