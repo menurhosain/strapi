@@ -54,7 +54,6 @@ module.exports = (plugin) => {
         username,
         email,
         password,
-        type,
         first_name,
         last_name,
         phone,
@@ -66,20 +65,12 @@ module.exports = (plugin) => {
       if (!username) missing.push("username");
       if (!email) missing.push("email");
       if (!password) missing.push("password");
-      if (!type) missing.push("type");
       if (!first_name) missing.push("first_name");
       if (!phone) missing.push("phone");
 
       if (missing.length > 0) {
         return ctx.badRequest(
           `Missing required fields: ${missing.join(", ")}.`,
-        );
-      }
-
-      // ── Type validation ──────────────────────────────────────────
-      if (!["applicant", "contractor"].includes(type)) {
-        return ctx.badRequest(
-          "Invalid type. Must be 'applicant' or 'contractor'.",
         );
       }
 
@@ -120,13 +111,13 @@ module.exports = (plugin) => {
         return ctx.badRequest("Username is already taken.");
       }
 
-      // ── Find role by type ────────────────────────────────────────
+      // ── Find subcontractor role ──────────────────────────────────
       const role = await strapi.db
         .query("plugin::users-permissions.role")
-        .findOne({ where: { type } });
+        .findOne({ where: { type: "subcontractor" } });
 
       if (!role) {
-        return ctx.badRequest(`Role '${type}' not found.`);
+        return ctx.badRequest("Role 'subcontractor' not found.");
       }
 
       // ── Create user ──────────────────────────────────────────────
@@ -138,7 +129,7 @@ module.exports = (plugin) => {
         last_name,
         phone,
         location,
-        type,
+        type: "subcontractor",
         role: role.id,
         confirmed: true,
         provider: "local",
@@ -149,7 +140,6 @@ module.exports = (plugin) => {
         .service("plugin::users-permissions.jwt")
         .issue({ id: user.id });
 
-      //remove fields form user object
       [
         "password",
         "resetPasswordToken",
