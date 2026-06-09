@@ -25,20 +25,19 @@ const config = {
 // Use the Display Name of each collection exactly as shown in the admin.
 // Collections not listed here will appear after the ones listed, alphabetically.
 const COLLECTION_ORDER = [
-  "Subcontractor",
-  "Subcontracted porjects",
+  "Subcontractors",
+  "Subcontracted projects",
   "Location",
   "User",
 ];
 
 const COLLECTION_SINGLE_ORDER = [
   "Dashboard",
-  "Register Contractor",
-  "Apply Contractor",
+  "Register Subcontractor",
+  "Apply Subcontractor",
   "Login",
   "Forget Password",
 ];
-
 
 const bootstrap = (app) => {
   injectCustomCSS();
@@ -215,7 +214,6 @@ const SIDEBAR_LISTS = [
     selector:
       'a[href*="/content-manager/single-types/"], a[href*="/content-type-builder/content-types/api::about-page"]',
     order: COLLECTION_SINGLE_ORDER,
-
   },
 ];
 
