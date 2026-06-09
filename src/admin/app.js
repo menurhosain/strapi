@@ -235,7 +235,7 @@ function watchSlugAutoFill() {
     attached = true;
     titleInput.addEventListener("input", () => {
       // Only auto-fill when the slug is empty
-      if (slugInput.value) return;
+      // if (slugInput.value) return;
       setNativeValue(slugInput, toSlug(titleInput.value));
     });
   });
