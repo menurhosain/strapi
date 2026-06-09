@@ -293,24 +293,21 @@ module.exports = createCoreController(
         return ctx.badRequest("You have already applied for this job.");
       }
 
-      const entity = await strapi.entityService.create(
-        "api::applicant.applicant",
-        {
-          data: {
-            firstName,
-            lastName,
-            email,
-            phone,
-            cvFile,
-            skills,
-            experienceYears,
-            location,
-            appliedAt: new Date(),
-            user: user.id,
-            applied_job: job.id,
-          },
+      const entity = await strapi.documents("api::applicant.applicant").create({
+        data: {
+          firstName,
+          lastName,
+          email,
+          phone: phone ?? null,
+          cvFile,
+          skills: skills ?? null,
+          experienceYears: experienceYears ?? null,
+          location: location ?? null,
+          appliedAt: new Date(),
+          user: { connect: [{ id: user.id }] },
+          applied_job: { connect: [{ documentId: job.documentId }] },
         },
-      );
+      });
 
       return this.transformResponse(entity);
     },
