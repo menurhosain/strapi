@@ -1,79 +1,79 @@
 {
-  "kind": "collectionType",
-  "collectionName": "applicants",
-  "info": {
-    "singularName": "applicant",
-    "pluralName": "applicants",
-    "displayName": "Applicant"
-  },
-  "options": {
-    "draftAndPublish": false
-  },
-  "pluginOptions": {},
-  "attributes": {
-    "firstName": {
-      "type": "string",
-      "required": true
-    },
-    "lastName": {
-      "type": "string",
-      "required": true
-    },
-    "email": {
-      "type": "email",
-      "required": true
-    },
-    "phone": {
-      "type": "string"
-    },
-    "cvFile": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "files",
-        "images"
-      ]
-    },
-    "skills": {
-      "type": "string"
-    },
-    "experienceYears": {
-      "type": "integer",
-      "min": 0,
-      "max": 50
-    },
-    "location": {
-      "type": "string"
-    },
-    "label": {
-      "type": "enumeration",
-      "required": true,
-      "default": "new",
-      "enum": [
-        "new",
-        "shortlisted",
-        "interview",
-        "hired",
-        "rejected"
-      ]
-    },
-    "adminNotes": {
-      "type": "text"
-    },
-    "appliedAt": {
-      "type": "datetime",
-      "required": true
-    },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user"
-    },
-    "applied_job": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::job.job"
-    }
-  }
+	"kind": "collectionType",
+	"collectionName": "applicants",
+	"info": {
+		"singularName": "applicant",
+		"pluralName": "applicants",
+		"displayName": "Applicants"
+	},
+	"options": {
+		"draftAndPublish": false
+	},
+	"pluginOptions": {},
+	"attributes": {
+		"firstName": {
+			"type": "string",
+			"required": true
+		},
+		"lastName": {
+			"type": "string",
+			"required": true
+		},
+		"email": {
+			"type": "email",
+			"required": true
+		},
+		"phone": {
+			"type": "string"
+		},
+		"cvFile": {
+			"type": "media",
+			"multiple": false,
+			"required": true,
+			"allowedTypes": [
+				"files",
+				"images"
+			]
+		},
+		"skills": {
+			"type": "string"
+		},
+		"experienceYears": {
+			"type": "integer",
+			"min": 0,
+			"max": 50
+		},
+		"location": {
+			"type": "string"
+		},
+		"label": {
+			"type": "enumeration",
+			"required": true,
+			"default": "new",
+			"enum": [
+				"new",
+				"shortlisted",
+				"interview",
+				"hired",
+				"rejected"
+			]
+		},
+		"adminNotes": {
+			"type": "text"
+		},
+		"appliedAt": {
+			"type": "datetime",
+			"required": true
+		},
+		"user": {
+			"type": "relation",
+			"relation": "manyToOne",
+			"target": "plugin::users-permissions.user"
+		},
+		"applied_job": {
+			"type": "relation",
+			"relation": "manyToOne",
+			"target": "api::job.job"
+		}
+	}
 }

@@ -23,7 +23,7 @@ const config = {
 // Edit this array to control the order of collection types in the sidebar.
 // Use the Display Name of each collection exactly as shown in the admin.
 // Collections not listed here will appear after the ones listed, alphabetically.
-const COLLECTION_ORDER = ["Applicant", "Jobs", "Location", "User"];
+const COLLECTION_ORDER = ["Applicants", "Jobs", "Locations", "User"];
 
 const COLLECTION_SINGLE_ORDER = [
   "Dashboard",
