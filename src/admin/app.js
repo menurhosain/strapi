@@ -34,6 +34,7 @@ const COLLECTION_ORDER = [
 
 const COLLECTION_SINGLE_ORDER = [
   "Dashboard",
+  "Projects Page",
   "Register Subcontractor",
   "Apply Subcontractor",
   "Login",
