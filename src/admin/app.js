@@ -1,6 +1,6 @@
 const config = {
   head: {
-    title: "SAH Admin",
+    title: "SAH job portal admin",
   },
   auth: {
     logo: "/favicon.png",
@@ -10,7 +10,7 @@ const config = {
   },
   translations: {
     en: {
-      "Auth.form.welcome.title": "Welcome to SAH Admin!",
+      "Auth.form.welcome.title": "Welcome to SAH job portal admin",
       "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
       "content-manager.components.LeftMenu.collection-types": "Jobs Portal",
       "content-type-builder.menu.section.models.name": "Jobs Portal",
@@ -31,13 +31,6 @@ const COLLECTION_SINGLE_ORDER = [
   "Apply Applicant",
   "Login",
   "Forget Password",
-];
-
-const COLLECTION_SINGLE_REST_ORDER = [
-  "Global",
-  "Mega menu",
-  "Offcanvas menu",
-  "Footer",
 ];
 
 const bootstrap = (app) => {
@@ -215,7 +208,6 @@ const SIDEBAR_LISTS = [
     selector:
       'a[href*="/content-manager/single-types/"], a[href*="/content-type-builder/content-types/api::about-page"]',
     order: COLLECTION_SINGLE_ORDER,
-    restOrder: COLLECTION_SINGLE_REST_ORDER,
   },
 ];
 
@@ -278,12 +270,10 @@ function watchSidebarOrder() {
 }
 
 function reorderCollectionSidebar() {
-  SIDEBAR_LISTS.forEach(({ selector, order, restOrder }) =>
-    reorderOl(selector, order, restOrder),
-  );
+  SIDEBAR_LISTS.forEach(({ selector, order }) => reorderOl(selector, order));
 }
 
-function reorderOl(selector, order, restOrder = []) {
+function reorderOl(selector, order) {
   const anchor = document.querySelector(selector);
   if (!anchor) return;
   const ol = anchor.closest("ol");
@@ -304,11 +294,7 @@ function reorderOl(selector, order, restOrder = []) {
     .map((name) => linkItems.find((li) => getLabel(li) === name))
     .filter(Boolean);
   const unordered = linkItems.filter((li) => !order.includes(getLabel(li)));
-  const restOrdered = restOrder
-    .map((name) => unordered.find((li) => getLabel(li) === name))
-    .filter(Boolean);
-  const remaining = unordered.filter((li) => !restOrder.includes(getLabel(li)));
-  const final = [...ordered, ...separators, ...restOrdered, ...remaining];
+  const final = [...ordered, ...separators, ...unordered];
 
   if (final.every((li, i) => li === allItems[i])) return;
 
