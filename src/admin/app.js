@@ -12,8 +12,9 @@ const config = {
     en: {
       "Auth.form.welcome.title": "Welcome to SAH Admin!",
       "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
-      "content-manager.components.LeftMenu.collection-types": "Post Types",
-      "content-type-builder.menu.section.models.name": "Post Types",
+      "content-manager.components.LeftMenu.collection-types":
+        "Subcontractor Portal",
+      "content-type-builder.menu.section.models.name": "Subcontractor Portal",
       "content-manager.components.LeftMenu.single-types": "All Pages",
       "content-type-builder.menu.section.single-types.name": "All Pages",
     },
@@ -24,59 +25,20 @@ const config = {
 // Use the Display Name of each collection exactly as shown in the admin.
 // Collections not listed here will appear after the ones listed, alphabetically.
 const COLLECTION_ORDER = [
-  "Applicant",
   "Subcontractor",
-  "News",
-  "Project",
-  "Service",
-  "Team",
+  "Subcontracted porjects",
   "Location",
-  "Industry",
-  "Tags",
-  "Contact",
-  "Pages",
-  "Job",
-  "Subcontracted",
-  "Scope",
-  "Add CSS Code",
-  "Add JS Code",
-  "Newsletter subscriber",
   "User",
 ];
 
 const COLLECTION_SINGLE_ORDER = [
-  "Home",
-  "About-us",
-  "Career",
-  "Contact",
-  "Become a subcontractor",
-  "Leadership",
-  "Partners",
-  "Projects",
-  "Project Detail",
-  "Services",
-  "Service Details",
-  "News",
-  "News Details",
+  "Dashboard",
   "Register Contractor",
-  "Register Applicant",
+  "Apply Contractor",
   "Login",
   "Forget Password",
-  "Dashboard",
-  "Apply contractor",
-  "Apply recrutement",
 ];
 
-const COLLECTION_SINGLE_REST_ORDER = [
-  "Global",
-  "Mega menu",
-  "Offcanvas menu",
-  "CTA",
-  "Career CTA",
-  "FAQ",
-  "Voices of Experience",
-  "Footer",
-];
 
 const bootstrap = (app) => {
   injectCustomCSS();
@@ -253,7 +215,7 @@ const SIDEBAR_LISTS = [
     selector:
       'a[href*="/content-manager/single-types/"], a[href*="/content-type-builder/content-types/api::about-page"]',
     order: COLLECTION_SINGLE_ORDER,
-    restOrder: COLLECTION_SINGLE_REST_ORDER,
+
   },
 ];
 
