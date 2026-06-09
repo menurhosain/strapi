@@ -10,8 +10,9 @@ const config = {
   },
   translations: {
     en: {
-      "Auth.form.welcome.title": "Welcome to SAH Admin!",
-      "Auth.form.welcome.subtitle": "Log in to your SAH admin account",
+      "Auth.form.welcome.title": "Welcome to SAH subcontractor admin portal !",
+      "Auth.form.welcome.subtitle":
+        "Log in to your SAH subcntractor admin account",
       "content-manager.components.LeftMenu.collection-types":
         "Subcontractor Portal",
       "content-type-builder.menu.section.models.name": "Subcontractor Portal",
