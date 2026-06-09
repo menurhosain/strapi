@@ -259,23 +259,23 @@ module.exports = createCoreController(
         subcontractedSlug,
       } = ctx.request.body.data ?? {};
 
-      let subcontractedId = null;
+      let projectDocumentId = null;
 
       if (subcontractedSlug) {
-        const subcontracted = await strapi.db
-          .query("api::subcontracted.subcontracted")
-          .findOne({ where: { slug: subcontractedSlug } });
+        const project = await strapi
+          .documents("api::subcontracted.subcontracted")
+          .findFirst({ filters: { slug: subcontractedSlug } });
 
-        if (!subcontracted) {
-          return ctx.badRequest("Subcontracted project not found.");
+        if (!project) {
+          return ctx.badRequest("Project not found.");
         }
 
-        const existing = await strapi.db
-          .query("api::subcontractor.subcontractor")
-          .findOne({
-            where: {
+        const existing = await strapi
+          .documents("api::subcontractor.subcontractor")
+          .findFirst({
+            filters: {
               user: { id: user.id },
-              applied_subcontracted: { id: subcontracted.id },
+              applied_on_project: { documentId: project.documentId },
             },
           });
 
@@ -283,12 +283,12 @@ module.exports = createCoreController(
           return ctx.badRequest("You have already applied for this project.");
         }
 
-        subcontractedId = subcontracted.id;
+        projectDocumentId = project.documentId;
       }
 
-      const entity = await strapi.entityService.create(
-        "api::subcontractor.subcontractor",
-        {
+      const entity = await strapi
+        .documents("api::subcontractor.subcontractor")
+        .create({
           data: {
             companyName,
             email,
@@ -298,10 +298,9 @@ module.exports = createCoreController(
             location,
             appliedAt: new Date(),
             user: user.id,
-            ...(subcontractedId && { applied_subcontracted: subcontractedId }),
+            ...(projectDocumentId && { applied_on_project: projectDocumentId }),
           },
-        },
-      );
+        });
 
       return this.transformResponse(entity);
     },
@@ -310,21 +309,35 @@ module.exports = createCoreController(
       const user = ctx.state.user;
       if (!user) return ctx.unauthorized("Login required");
 
-      const { query } = ctx;
+      const { populate, sort, fields, pagination } = ctx.query;
 
-      const data = await strapi.entityService.findMany(
-        "api::subcontractor.subcontractor",
-        {
-          ...query,
-          filters: {
-            user: {
-              id: user.id,
-            },
+      const filters = { user: { id: user.id } };
+
+      const [data, total] = await Promise.all([
+        strapi.documents("api::subcontractor.subcontractor").findMany({
+          filters,
+          populate,
+          sort,
+          fields,
+          pagination,
+        }),
+        strapi.documents("api::subcontractor.subcontractor").count({ filters }),
+      ]);
+
+      const pageSize = pagination?.pageSize ?? 25;
+      const page = pagination?.page ?? 1;
+
+      return {
+        data: data.map(sanitize),
+        meta: {
+          pagination: {
+            page: Number(page),
+            pageSize: Number(pageSize),
+            pageCount: Math.ceil(total / pageSize),
+            total,
           },
         },
-      );
-
-      return this.transformResponse(data.map(sanitize));
+      };
     },
 
     async findOne(ctx) {
@@ -333,9 +346,9 @@ module.exports = createCoreController(
 
       const { id } = ctx.params;
 
-      const entity = await strapi.db
-        .query("api::subcontractor.subcontractor")
-        .findOne({ where: { documentId: id }, populate: ["user"] });
+      const entity = await strapi
+        .documents("api::subcontractor.subcontractor")
+        .findOne({ documentId: id, populate: ["user"] });
 
       if (!entity) {
         return ctx.notFound("Subcontractor not found");

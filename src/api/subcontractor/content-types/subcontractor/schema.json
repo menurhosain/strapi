@@ -62,7 +62,7 @@
 			"relation": "manyToOne",
 			"target": "plugin::users-permissions.user"
 		},
-		"applied_subcontracted": {
+		"applied_on_project": {
 			"type": "relation",
 			"relation": "manyToOne",
 			"target": "api::subcontracted.subcontracted"
