@@ -17,16 +17,16 @@
   "attributes": {
     "logo": {
       "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ],
       "pluginOptions": {
         "i18n": {
           "localized": false
         }
-      }
+      },
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "nav_links": {
       "type": "component",
@@ -93,22 +93,6 @@
       "pluginOptions": {
         "i18n": {
           "localized": false
-        }
-      }
-    },
-    "newsletter_placeholder": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "newsletter_button_label": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
         }
       }
     }
