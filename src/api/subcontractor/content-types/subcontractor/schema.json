@@ -11,7 +11,15 @@
 	},
 	"pluginOptions": {},
 	"attributes": {
-		"companyName": {
+		"fullName": {
+			"type": "string",
+			"required": true
+		},
+		"title": {
+			"type": "string",
+			"required": true
+		},
+		"phone": {
 			"type": "string",
 			"required": true
 		},
@@ -19,25 +27,66 @@
 			"type": "email",
 			"required": true
 		},
-		"phone": {
+		"companyName": {
+			"type": "string",
+			"required": true
+		},
+		"registrationNumber": {
+			"type": "string",
+			"required": true
+		},
+		"foundingYear": {
+			"type": "integer",
+			"required": true,
+			"min": 1800,
+			"max": 2100
+		},
+		"mainTrades": {
+			"type": "text",
+			"required": true
+		},
+		"country": {
+			"type": "string",
+			"required": true
+		},
+		"state": {
+			"type": "string",
+			"required": true
+		},
+		"city": {
+			"type": "string",
+			"required": true
+		},
+		"address": {
+			"type": "string",
+			"required": true
+		},
+		"postalCode": {
+			"type": "string",
+			"required": true
+		},
+		"companyPhone": {
+			"type": "string",
+			"required": true
+		},
+		"ext": {
 			"type": "string"
+		},
+		"taxId": {
+			"type": "string",
+			"required": true
 		},
 		"documents": {
 			"type": "media",
 			"multiple": true,
-			"required": false,
+			"required": true,
 			"allowedTypes": [
-				"files",
-				"images"
+				"files"
 			]
 		},
-		"experienceYears": {
-			"type": "integer",
-			"min": 0,
-			"max": 100
-		},
-		"location": {
-			"type": "string"
+		"description": {
+			"type": "text",
+			"required": true
 		},
 		"label": {
 			"type": "enumeration",

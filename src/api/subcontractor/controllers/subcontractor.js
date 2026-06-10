@@ -10,31 +10,67 @@
  *   schemas:
  *     SubcontractorInput:
  *       type: object
- *       required: [companyName, email, label]
+ *       required: [fullName, title, phone, email, companyName, registrationNumber, foundingYear, mainTrades, country, state, city, address, postalCode, companyPhone, taxId, description]
  *       properties:
- *         companyName:
+ *         fullName:
  *           type: string
- *           example: "Acme Construction Ltd"
+ *           example: "John Doe"
+ *         title:
+ *           type: string
+ *           example: "Project Manager"
+ *         phone:
+ *           type: string
+ *           example: "+1234567890"
  *         email:
  *           type: string
  *           format: email
  *           example: contact@acme.com
- *         phone:
+ *         companyName:
  *           type: string
- *           example: "+1234567890"
+ *           example: "Acme Construction Ltd"
+ *         registrationNumber:
+ *           type: string
+ *           example: "CR-123456"
+ *         foundingYear:
+ *           type: integer
+ *           minimum: 1800
+ *           maximum: 2100
+ *           example: 2005
+ *         mainTrades:
+ *           type: string
+ *           example: "Electrical, Plumbing"
+ *         country:
+ *           type: string
+ *           example: "United States"
+ *         state:
+ *           type: string
+ *           example: "Illinois"
+ *         city:
+ *           type: string
+ *           example: "Chicago"
+ *         address:
+ *           type: string
+ *           example: "123 Main St"
+ *         postalCode:
+ *           type: string
+ *           example: "60601"
+ *         companyPhone:
+ *           type: string
+ *           example: "+13125550100"
+ *         ext:
+ *           type: string
+ *           example: "42"
+ *         taxId:
+ *           type: string
+ *           example: "12-3456789"
  *         documents:
  *           type: array
  *           items:
  *             type: integer
- *           description: Strapi media file IDs
- *         experienceYears:
- *           type: integer
- *           minimum: 0
- *           maximum: 100
- *           example: 5
- *         location:
+ *           description: Strapi media file IDs (pdf, docx, doc)
+ *         description:
  *           type: string
- *           example: "Chicago"
+ *           example: "Specialised in commercial fit-outs."
  *         label:
  *           type: string
  *           enum: [New, Approved, Contacted, Rejected]
@@ -76,32 +112,7 @@
  *             type: object
  *             properties:
  *               data:
- *                 type: object
- *                 required: [companyName, email]
- *                 properties:
- *                   companyName:
- *                     type: string
- *                     example: "Acme Construction Ltd"
- *                   email:
- *                     type: string
- *                     format: email
- *                     example: contact@acme.com
- *                   phone:
- *                     type: string
- *                     example: "+1234567890"
- *                   documents:
- *                     type: array
- *                     items:
- *                       type: integer
- *                     description: Strapi media file IDs
- *                   experienceYears:
- *                     type: integer
- *                     minimum: 0
- *                     maximum: 100
- *                     example: 5
- *                   location:
- *                     type: string
- *                     example: "Chicago"
+ *                 $ref: '#/components/schemas/SubcontractorInput'
  *     responses:
  *       200:
  *         description: Subcontractor created
@@ -196,31 +207,7 @@
  *             type: object
  *             properties:
  *               data:
- *                 type: object
- *                 properties:
- *                   companyName:
- *                     type: string
- *                     example: "Acme Construction Ltd"
- *                   email:
- *                     type: string
- *                     format: email
- *                     example: contact@acme.com
- *                   phone:
- *                     type: string
- *                     example: "+1234567890"
- *                   documents:
- *                     type: array
- *                     items:
- *                       type: integer
- *                     description: Strapi media file IDs
- *                   experienceYears:
- *                     type: integer
- *                     minimum: 0
- *                     maximum: 100
- *                     example: 5
- *                   location:
- *                     type: string
- *                     example: "Chicago"
+ *                 $ref: '#/components/schemas/SubcontractorInput'
  *     responses:
  *       200:
  *         description: Subcontractor updated
@@ -250,14 +237,73 @@ module.exports = createCoreController(
       if (!user) return ctx.unauthorized("Login required");
 
       const {
-        companyName,
-        email,
+        fullName,
+        title,
         phone,
+        email,
+        companyName,
+        registrationNumber,
+        foundingYear,
+        mainTrades,
+        country,
+        state,
+        city,
+        address,
+        postalCode,
+        companyPhone,
+        ext,
+        taxId,
         documents,
-        experienceYears,
-        location,
+        description,
         subcontractedSlug,
       } = ctx.request.body.data ?? {};
+
+      const REQUIRED = {
+        fullName,
+        title,
+        phone,
+        email,
+        companyName,
+        registrationNumber,
+        foundingYear,
+        mainTrades,
+        country,
+        state,
+        city,
+        address,
+        postalCode,
+        companyPhone,
+        taxId,
+        description,
+      };
+
+      const missing = Object.entries(REQUIRED)
+        .filter(([, v]) => v === undefined || v === null || v === "")
+        .map(([k]) => k);
+
+      if (!Array.isArray(documents) || documents.length === 0) {
+        missing.push("documents");
+      }
+
+      if (missing.length > 0) {
+        return ctx.badRequest(`Missing required fields: ${missing.join(", ")}`);
+      }
+
+      const ALLOWED_MIME_TYPES = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      ];
+
+      const files = await strapi.db.query("plugin::upload.file").findMany({
+        where: { id: { $in: documents } },
+        select: ["id", "mime"],
+      });
+
+      const invalidFiles = files.filter((f) => !ALLOWED_MIME_TYPES.includes(f.mime));
+      if (invalidFiles.length > 0) {
+        return ctx.badRequest("Only PDF, DOC, and DOCX files are allowed for documents.");
+      }
 
       let projectDocumentId = null;
 
@@ -290,12 +336,24 @@ module.exports = createCoreController(
         .documents("api::subcontractor.subcontractor")
         .create({
           data: {
-            companyName,
-            email,
+            fullName,
+            title,
             phone,
+            email,
+            companyName,
+            registrationNumber,
+            foundingYear,
+            mainTrades,
+            country,
+            state,
+            city,
+            address,
+            postalCode,
+            companyPhone,
+            ext,
+            taxId,
             documents,
-            experienceYears,
-            location,
+            description,
             appliedAt: new Date(),
             user: user.id,
             ...(projectDocumentId && { applied_on_project: projectDocumentId }),
