@@ -70,6 +70,14 @@
 					"localized": true
 				}
 			}
+		},
+		"search_keywords": {
+			"type": "text",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
 		}
 	}
 }
