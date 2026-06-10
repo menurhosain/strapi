@@ -11,40 +11,63 @@
 	},
 	"pluginOptions": {},
 	"attributes": {
-		"firstName": {
+		"fullName": {
 			"type": "string",
 			"required": true
 		},
-		"lastName": {
+		"currentLocation": {
 			"type": "string",
 			"required": true
+		},
+		"gccExperience": {
+			"type": "enumeration",
+			"required": true,
+			"enum": [
+				"yes",
+				"no"
+			]
 		},
 		"email": {
 			"type": "email",
 			"required": true
 		},
 		"phone": {
-			"type": "string"
+			"type": "string",
+			"required": true
 		},
-		"cvFile": {
+		"experienceYears": {
+			"type": "integer",
+			"required": true,
+			"min": 0,
+			"max": 50
+		},
+		"nationality": {
+			"type": "string",
+			"required": true
+		},
+		"photo": {
 			"type": "media",
 			"multiple": false,
 			"required": true,
 			"allowedTypes": [
-				"files",
 				"images"
 			]
 		},
-		"skills": {
-			"type": "string"
+		"cv": {
+			"type": "media",
+			"multiple": false,
+			"required": true,
+			"allowedTypes": [
+				"files"
+			]
 		},
-		"experienceYears": {
-			"type": "integer",
-			"min": 0,
-			"max": 50
-		},
-		"location": {
-			"type": "string"
+		"coverLetter": {
+			"type": "media",
+			"multiple": false,
+			"required": false,
+			"allowedTypes": [
+				"files"
+			]
 		},
 		"label": {
 			"type": "enumeration",

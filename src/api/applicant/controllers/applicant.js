@@ -1,249 +1,27 @@
 "use strict";
 
-/**
- * @openapi
- * tags:
- *   - name: Applicants
- *     description: Job applicant submissions (authenticated users only)
- *
- * components:
- *   schemas:
- *     ApplicantInput:
- *       type: object
- *       required: [firstName, lastName, email, cvFile, label, appliedAt]
- *       properties:
- *         firstName:
- *           type: string
- *           example: John
- *         lastName:
- *           type: string
- *           example: Doe
- *         email:
- *           type: string
- *           format: email
- *           example: john@example.com
- *         phone:
- *           type: string
- *           example: "+1234567890"
- *         cvFile:
- *           type: integer
- *           description: Strapi media file ID
- *           example: 1
- *         skills:
- *           type: string
- *           example: "JavaScript, Node.js"
- *         experienceYears:
- *           type: integer
- *           minimum: 0
- *           maximum: 50
- *           example: 3
- *         location:
- *           type: string
- *           example: "New York"
- *         label:
- *           type: string
- *           enum: [new, shortlisted, interview, hired, rejected]
- *           default: new
- *         adminNotes:
- *           type: string
- *         appliedAt:
- *           type: string
- *           format: date-time
- *
- *     ApplicantResponse:
- *       type: object
- *       properties:
- *         data:
- *           type: object
- *           properties:
- *             id:
- *               type: integer
- *             attributes:
- *               $ref: '#/components/schemas/ApplicantInput'
- *         meta:
- *           type: object
- *
- * /api/applicants:
- *   post:
- *     tags: [Applicants]
- *     summary: Submit a new applicant
- *     description: Creates an applicant entry linked to the authenticated user. `label` and `adminNotes` are set by the admin panel.
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               data:
- *                 type: object
- *                 required: [firstName, lastName, email, cvFile]
- *                 properties:
- *                   firstName:
- *                     type: string
- *                     example: John
- *                   lastName:
- *                     type: string
- *                     example: Doe
- *                   email:
- *                     type: string
- *                     format: email
- *                     example: john@example.com
- *                   phone:
- *                     type: string
- *                     example: "+1234567890"
- *                   cvFile:
- *                     type: integer
- *                     description: Strapi media file ID
- *                     example: 1
- *                   skills:
- *                     type: string
- *                     example: "JavaScript, Node.js"
- *                   experienceYears:
- *                     type: integer
- *                     minimum: 0
- *                     maximum: 50
- *                     example: 3
- *                   location:
- *                     type: string
- *                     example: "New York"
- *     responses:
- *       200:
- *         description: Applicant created
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ApplicantResponse'
- *       401:
- *         description: Login required
- *
- *   get:
- *     tags: [Applicants]
- *     summary: List applicants for the authenticated user
- *     description: Returns only applicants belonging to the logged-in user. Client-side filters are ignored.
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: query
- *         name: pagination[page]
- *         schema:
- *           type: integer
- *         example: 1
- *       - in: query
- *         name: pagination[pageSize]
- *         schema:
- *           type: integer
- *         example: 25
- *       - in: query
- *         name: populate
- *         schema:
- *           type: string
- *         example: cvFile
- *     responses:
- *       200:
- *         description: List of applicants
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   type: array
- *                   items:
- *                     $ref: '#/components/schemas/ApplicantInput'
- *                 meta:
- *                   type: object
- *       401:
- *         description: Login required
- *
- * /api/applicants/{id}:
- *   get:
- *     tags: [Applicants]
- *     summary: Get a single applicant by ID
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     responses:
- *       200:
- *         description: Applicant found
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/ApplicantResponse'
- *       404:
- *         description: Not found
- *
- *   put:
- *     tags: [Applicants]
- *     summary: Update an applicant
- *     description: Only the fields below can be updated. `label` and `adminNotes` are managed by the admin panel.
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               data:
- *                 type: object
- *                 properties:
- *                   firstName:
- *                     type: string
- *                     example: John
- *                   lastName:
- *                     type: string
- *                     example: Doe
- *                   email:
- *                     type: string
- *                     format: email
- *                     example: john@example.com
- *                   phone:
- *                     type: string
- *                     example: "+1234567890"
- *                   cvFile:
- *                     type: integer
- *                     description: Strapi media file ID
- *                     example: 1
- *                   skills:
- *                     type: string
- *                     example: "JavaScript, Node.js"
- *                   experienceYears:
- *                     type: integer
- *                     minimum: 0
- *                     maximum: 50
- *                     example: 3
- *                   location:
- *                     type: string
- *                     example: "New York"
- *     responses:
- *       200:
- *         description: Applicant updated
- *       401:
- *         description: Login required
- *       403:
- *         description: You can only update your own applicants
- *       404:
- *         description: Not found
- */
-
 const { createCoreController } = require("@strapi/strapi").factories;
 
 const HIDDEN_FIELDS = ["createdAt", "updatedAt", "publishedAt", "adminNotes"];
+
+const PHOTO_MIME_TYPES = ["image/jpeg", "image/png"];
+const DOC_MIME_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
+const REQUIRED = {
+  fullName: "Full name",
+  currentLocation: "Current location",
+  gccExperience: "Experience in GCC",
+  email: "Email",
+  phone: "Phone",
+  experienceYears: "Years of experience",
+  nationality: "Nationality",
+  photo: "Photo",
+  cv: "CV",
+};
 
 function sanitize(entity) {
   const result = { ...entity };
@@ -251,58 +29,100 @@ function sanitize(entity) {
   return result;
 }
 
+async function validateMediaMime(strapi, id, allowedMimes, fieldLabel) {
+  if (!id) return null;
+  const file = await strapi.db
+    .query("plugin::upload.file")
+    .findOne({ where: { id }, select: ["id", "mime"] });
+  if (!file) return `${fieldLabel}: file not found.`;
+  if (!allowedMimes.includes(file.mime))
+    return `${fieldLabel}: invalid file type (${file.mime}).`;
+  return null;
+}
+
 module.exports = createCoreController(
   "api::applicant.applicant",
   ({ strapi }) => ({
     async create(ctx) {
       const user = ctx.state.user;
-
-      if (!user) {
-        return ctx.unauthorized("Login required");
-      }
+      if (!user) return ctx.unauthorized("Login required");
 
       const {
-        firstName,
-        lastName,
+        fullName,
+        currentLocation,
+        gccExperience,
         email,
         phone,
-        cvFile,
-        skills,
         experienceYears,
-        location,
+        nationality,
+        photo,
+        cv,
+        coverLetter,
         jobSlug,
       } = ctx.request.body.data ?? {};
 
-      // jobSlug is required
+      // jobSlug required
       if (!jobSlug) {
         return ctx.badRequest("A job must be selected to submit an application.");
       }
 
       const job = await strapi.db.query("api::job.job").findOne({ where: { slug: jobSlug } });
+      if (!job) return ctx.badRequest("Job not found.");
 
-      if (!job) {
-        return ctx.badRequest("Job not found.");
-      }
-
-      // Duplicate check: same user + same job
+      // Duplicate check
       const existing = await strapi.db.query("api::applicant.applicant").findOne({
         where: { user: { id: user.id }, applied_job: { id: job.id } },
       });
+      if (existing) return ctx.badRequest("You have already applied for this job.");
 
-      if (existing) {
-        return ctx.badRequest("You have already applied for this job.");
+      // Required field validation
+      const missing = [];
+      for (const [field, label] of Object.entries(REQUIRED)) {
+        const val = ctx.request.body.data?.[field];
+        const empty = val === undefined || val === null || val === "";
+        if (empty) missing.push(label);
+      }
+      if (missing.length > 0) {
+        return ctx.badRequest(`Missing required fields: ${missing.join(", ")}.`);
+      }
+
+      // gccExperience must be yes or no
+      if (!["yes", "no"].includes(gccExperience)) {
+        return ctx.badRequest("Experience in GCC must be 'yes' or 'no'.");
+      }
+
+      // experienceYears range
+      const expYears = Number(experienceYears);
+      if (!Number.isInteger(expYears) || expYears < 0 || expYears > 50) {
+        return ctx.badRequest("Years of experience must be an integer between 0 and 50.");
+      }
+
+      // Photo mime validation (jpg/jpeg/png only)
+      const photoError = await validateMediaMime(strapi, photo, PHOTO_MIME_TYPES, "Photo");
+      if (photoError) return ctx.badRequest(photoError);
+
+      // CV mime validation (pdf/doc/docx only)
+      const cvError = await validateMediaMime(strapi, cv, DOC_MIME_TYPES, "CV");
+      if (cvError) return ctx.badRequest(cvError);
+
+      // Cover letter mime validation if provided
+      if (coverLetter) {
+        const clError = await validateMediaMime(strapi, coverLetter, DOC_MIME_TYPES, "Cover letter");
+        if (clError) return ctx.badRequest(clError);
       }
 
       const entity = await strapi.documents("api::applicant.applicant").create({
         data: {
-          firstName,
-          lastName,
+          fullName,
+          currentLocation,
+          gccExperience,
           email,
-          phone: phone ?? null,
-          cvFile,
-          skills: skills ?? null,
-          experienceYears: experienceYears ?? null,
-          location: location ?? null,
+          phone,
+          experienceYears: expYears,
+          nationality,
+          photo,
+          cv,
+          coverLetter: coverLetter ?? null,
           appliedAt: new Date(),
           user: { connect: [{ id: user.id }] },
           applied_job: { connect: [{ documentId: job.documentId }] },
@@ -314,20 +134,19 @@ module.exports = createCoreController(
 
     async update(ctx) {
       const user = ctx.state.user;
-
-      if (!user) {
-        return ctx.unauthorized("Login required");
-      }
+      if (!user) return ctx.unauthorized("Login required");
 
       const allowedFields = [
-        "firstName",
-        "lastName",
+        "fullName",
+        "currentLocation",
+        "gccExperience",
         "email",
         "phone",
-        "cvFile",
-        "skills",
         "experienceYears",
-        "location",
+        "nationality",
+        "photo",
+        "cv",
+        "coverLetter",
       ];
 
       const body = ctx.request.body.data ?? {};
@@ -344,34 +163,21 @@ module.exports = createCoreController(
 
     async find(ctx) {
       const user = ctx.state.user;
-
-      if (!user) {
-        return ctx.unauthorized("Login required");
-      }
+      if (!user) return ctx.unauthorized("Login required");
 
       const { query } = ctx;
 
-      const data = await strapi.entityService.findMany(
-        "api::applicant.applicant",
-        {
-          ...query,
-          filters: {
-            user: {
-              id: user.id,
-            },
-          },
-        },
-      );
+      const data = await strapi.entityService.findMany("api::applicant.applicant", {
+        ...query,
+        filters: { user: { id: user.id } },
+      });
 
       return this.transformResponse(data.map(sanitize));
     },
 
     async findOne(ctx) {
       const user = ctx.state.user;
-
-      if (!user) {
-        return ctx.unauthorized("Login required");
-      }
+      if (!user) return ctx.unauthorized("Login required");
 
       const { id } = ctx.params;
 
@@ -379,9 +185,7 @@ module.exports = createCoreController(
         .query("api::applicant.applicant")
         .findOne({ where: { documentId: id }, populate: ["user"] });
 
-      if (!entity) {
-        return ctx.notFound("Applicant not found");
-      }
+      if (!entity) return ctx.notFound("Applicant not found");
 
       if (String(entity.user?.id) !== String(user.id)) {
         return ctx.forbidden("You can only view your own applicants");
@@ -390,7 +194,7 @@ module.exports = createCoreController(
       const data = await strapi.entityService.findOne(
         "api::applicant.applicant",
         entity.id,
-        ctx.query
+        ctx.query,
       );
 
       if (!data) return ctx.notFound("Applicant not found");
