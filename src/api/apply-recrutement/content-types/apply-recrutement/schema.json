@@ -35,6 +35,15 @@
 				}
 			}
 		},
+		"applying_for_label": {
+			"type": "string",
+			"displayName": "Label — Applying For",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
 		"form_subtitle": {
 			"type": "string",
 			"displayName": "Form Subtitle",
@@ -44,18 +53,72 @@
 				}
 			}
 		},
-		"label_first_name": {
+		"label_full_name": {
 			"type": "string",
-			"displayName": "Label — First Name",
+			"displayName": "Label — Full Name",
 			"pluginOptions": {
 				"i18n": {
 					"localized": true
 				}
 			}
 		},
-		"label_last_name": {
+		"placeholder_full_name": {
 			"type": "string",
-			"displayName": "Label — Last Name",
+			"displayName": "Placeholder — Full Name",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_current_location": {
+			"type": "string",
+			"displayName": "Label — Current Location",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"placeholder_current_location": {
+			"type": "string",
+			"displayName": "Placeholder — Current Location",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_gcc_experience": {
+			"type": "string",
+			"displayName": "Label — Experience in GCC",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"gcc_select_default": {
+			"type": "string",
+			"displayName": "GCC Select — Default Option",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"gcc_option_yes": {
+			"type": "string",
+			"displayName": "GCC Select — Yes Option",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"gcc_option_no": {
+			"type": "string",
+			"displayName": "GCC Select — No Option",
 			"pluginOptions": {
 				"i18n": {
 					"localized": true
@@ -71,72 +134,18 @@
 				}
 			}
 		},
-		"label_phone": {
-			"type": "string",
-			"displayName": "Label — Phone",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"label_cv": {
-			"type": "string",
-			"displayName": "Label — CV / Resume",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"label_skills": {
-			"type": "string",
-			"displayName": "Label — Skills",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"label_experience_years": {
-			"type": "string",
-			"displayName": "Label — Years of Experience",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"label_location": {
-			"type": "string",
-			"displayName": "Label — Location",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"placeholder_first_name": {
-			"type": "string",
-			"displayName": "Placeholder — First Name",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"placeholder_last_name": {
-			"type": "string",
-			"displayName": "Placeholder — Last Name",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
 		"placeholder_email": {
 			"type": "string",
 			"displayName": "Placeholder — Email",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_phone": {
+			"type": "string",
+			"displayName": "Label — Phone",
 			"pluginOptions": {
 				"i18n": {
 					"localized": true
@@ -152,9 +161,9 @@
 				}
 			}
 		},
-		"placeholder_skills": {
+		"label_experience_years": {
 			"type": "string",
-			"displayName": "Placeholder — Skills",
+			"displayName": "Label — Years of Experience",
 			"pluginOptions": {
 				"i18n": {
 					"localized": true
@@ -170,9 +179,72 @@
 				}
 			}
 		},
-		"placeholder_location": {
+		"label_nationality": {
 			"type": "string",
-			"displayName": "Placeholder — Location",
+			"displayName": "Label — Nationality",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"placeholder_nationality": {
+			"type": "string",
+			"displayName": "Placeholder — Nationality",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_photo": {
+			"type": "string",
+			"displayName": "Label — Photo",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"hint_photo": {
+			"type": "string",
+			"displayName": "Hint — Photo (size & types)",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_cv": {
+			"type": "string",
+			"displayName": "Label — CV",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"hint_cv": {
+			"type": "string",
+			"displayName": "Hint — CV (size & types)",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"label_cover_letter": {
+			"type": "string",
+			"displayName": "Label — Cover Letter",
+			"pluginOptions": {
+				"i18n": {
+					"localized": true
+				}
+			}
+		},
+		"hint_cover_letter": {
+			"type": "string",
+			"displayName": "Hint — Cover Letter (size & types)",
 			"pluginOptions": {
 				"i18n": {
 					"localized": true
