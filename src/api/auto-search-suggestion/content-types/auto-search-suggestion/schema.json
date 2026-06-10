@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "auto_search_suggestions",
+  "info": {
+    "singularName": "auto-search-suggestion",
+    "pluralName": "auto-search-suggestions",
+    "displayName": "Auto search suggestion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "search_query": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,7 @@ const COLLECTION_ORDER = [
   "Subcontractors",
   "Subcontracted projects",
   "Location",
+  "Auto search suggestion",
   "User",
 ];
 
