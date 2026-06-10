@@ -1,67 +1,75 @@
 {
-	"kind": "collectionType",
-	"collectionName": "subcontracteds",
-	"info": {
-		"singularName": "subcontracted",
-		"pluralName": "subcontracteds",
-		"displayName": "Subcontracted projects"
-	},
-	"options": {
-		"draftAndPublish": true
-	},
-	"pluginOptions": {
-		"i18n": {
-			"localized": true
-		}
-	},
-	"attributes": {
-		"title": {
-			"type": "string",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			},
-			"required": true
-		},
-		"slug": {
-			"type": "string",
-			"pluginOptions": {
-				"i18n": {
-					"localized": false
-				}
-			},
-			"required": true,
-			"unique": true
-		},
-		"locations": {
-			"type": "relation",
-			"relation": "oneToMany",
-			"target": "api::location.location"
-		},
-		"deadline": {
-			"type": "date",
-			"pluginOptions": {
-				"i18n": {
-					"localized": false
-				}
-			}
-		},
-		"experience": {
-			"type": "string",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		},
-		"details": {
-			"type": "blocks",
-			"pluginOptions": {
-				"i18n": {
-					"localized": true
-				}
-			}
-		}
-	}
+  "kind": "collectionType",
+  "collectionName": "subcontracteds",
+  "info": {
+    "singularName": "subcontracted",
+    "pluralName": "subcontracteds",
+    "displayName": "Subcontracted projects"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true,
+      "unique": true
+    },
+    "locations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::location.location"
+    },
+    "deadline": {
+      "type": "date",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "experience": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "details": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "search_keywords": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    }
+  }
 }
