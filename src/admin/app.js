@@ -33,6 +33,7 @@ const COLLECTION_ORDER = [
 
 const COLLECTION_SINGLE_ORDER = [
   "Dashboard",
+  "Jobs Page",
   "Register Applicant",
   "Apply Applicant",
   "Login",
