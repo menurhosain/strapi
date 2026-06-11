@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_job_listings",
+  "info": {
+    "displayName": "Job Listing",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "job_status": {
+      "type": "string"
+    },
+    "job_title": {
+      "type": "string",
+      "required": true
+    },
+    "btn_label": {
+      "type": "string"
+    },
+    "btn_link": {
+      "type": "string"
+    }
+  }
+}
