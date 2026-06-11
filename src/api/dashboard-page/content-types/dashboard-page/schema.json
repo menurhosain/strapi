@@ -45,18 +45,6 @@
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }
     },
-    "applicant_section_label": {
-      "type": "string",
-      "pluginOptions": { "i18n": { "localized": true } }
-    },
-    "applicant_apply_label": {
-      "type": "string",
-      "pluginOptions": { "i18n": { "localized": true } }
-    },
-    "applicant_apply_description": {
-      "type": "string",
-      "pluginOptions": { "i18n": { "localized": true } }
-    },
     "contractor_section_label": {
       "type": "string",
       "pluginOptions": { "i18n": { "localized": true } }

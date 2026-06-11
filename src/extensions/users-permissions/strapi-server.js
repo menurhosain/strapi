@@ -77,10 +77,8 @@ module.exports = (plugin) => {
       }
 
       // ── Type validation ──────────────────────────────────────────
-      if (!["applicant", "contractor"].includes(type)) {
-        return ctx.badRequest(
-          "Invalid type. Must be 'applicant' or 'contractor'.",
-        );
+      if (type !== "contractor") {
+        return ctx.badRequest("Invalid type. Must be 'contractor'.");
       }
 
       // ── minLength validation ─────────────────────────────────────

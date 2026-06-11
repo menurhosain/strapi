@@ -44,8 +44,7 @@
  *     tags: [Auth]
  *     summary: Register a new user
  *     description: |
- *       Creates a new user account. The `type` field determines the role assigned
- *       (`applicant` or `contractor`). Fields `role`, `confirmed`, and `provider`
+ *       Creates a new user account. The `type` field must be `contractor`. Fields `role`, `confirmed`, and `provider`
  *       are set automatically by the server and must not be sent.
  *     requestBody:
  *       required: true
@@ -70,8 +69,8 @@
  *                 example: MyPassword123
  *               type:
  *                 type: string
- *                 enum: [applicant, contractor]
- *                 example: applicant
+ *                 enum: [contractor]
+ *                 example: contractor
  *               first_name:
  *                 type: string
  *                 example: John
@@ -176,7 +175,7 @@
  *           type: string
  *         type:
  *           type: string
- *           enum: [applicant, contractor]
+ *           enum: [contractor]
  *         profile_picture:
  *           type: object
  *           description: Uploaded image media object
