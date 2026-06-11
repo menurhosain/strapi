@@ -46,6 +46,8 @@ module.exports = createCoreController(
     async create(ctx) {
       const user = ctx.state.user;
       if (!user) return ctx.unauthorized("Login required");
+      if (!user.confirmed) return ctx.forbidden("Please confirm your email address before submitting an application.");
+      if (user.blocked) return ctx.forbidden("Your account has been blocked. Please contact support.");
 
       const {
         fullName,
@@ -164,6 +166,8 @@ module.exports = createCoreController(
     async find(ctx) {
       const user = ctx.state.user;
       if (!user) return ctx.unauthorized("Login required");
+      if (!user.confirmed) return ctx.forbidden("Please confirm your email address before submitting an application.");
+      if (user.blocked) return ctx.forbidden("Your account has been blocked. Please contact support.");
 
       const { query } = ctx;
 
@@ -178,6 +182,8 @@ module.exports = createCoreController(
     async findOne(ctx) {
       const user = ctx.state.user;
       if (!user) return ctx.unauthorized("Login required");
+      if (!user.confirmed) return ctx.forbidden("Please confirm your email address before submitting an application.");
+      if (user.blocked) return ctx.forbidden("Your account has been blocked. Please contact support.");
 
       const { id } = ctx.params;
 
