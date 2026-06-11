@@ -24,8 +24,6 @@ const config = {
 // Use the Display Name of each collection exactly as shown in the admin.
 // Collections not listed here will appear after the ones listed, alphabetically.
 const COLLECTION_ORDER = [
-  "Applicant",
-  "Subcontractor",
   "News",
   "Project",
   "Service",
@@ -33,14 +31,12 @@ const COLLECTION_ORDER = [
   "Location",
   "Industry",
   "Tags",
-  "Contact",
+  "Contacts",
   "Pages",
-  "Job",
-  "Subcontracted",
   "Scope",
   "Add CSS Code",
   "Add JS Code",
-  "Newsletter subscriber",
+  "Newsletter subscribers",
   "User",
 ];
 
@@ -58,13 +54,9 @@ const COLLECTION_SINGLE_ORDER = [
   "Service Details",
   "News",
   "News Details",
-  "Register Contractor",
-  "Register Applicant",
   "Login",
   "Forget Password",
   "Dashboard",
-  "Apply contractor",
-  "Apply recrutement",
 ];
 
 const COLLECTION_SINGLE_REST_ORDER = [
