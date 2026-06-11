@@ -208,34 +208,22 @@ function setNativeValue(input, value) {
 }
 
 function watchSlugAutoFill() {
-  let attached = false;
-
   const observer = new MutationObserver(() => {
     const isContentManager =
       window.location.pathname.includes("/content-manager/");
-    if (!isContentManager) {
-      attached = false;
-      return;
-    }
+    if (!isContentManager) return;
 
     const locale =
       new URLSearchParams(window.location.search).get("locale") || "en";
-    if (locale !== "en") {
-      attached = false;
-      return;
-    }
+    if (locale !== "en") return;
 
-    // Some content types use "title", others use "name"
     const titleInput =
       document.querySelector('input[name="title"]') ||
       document.querySelector('input[name="name"]');
     const slugInput = document.querySelector('input[name="slug"]');
-    if (!titleInput || !slugInput || attached) return;
+    if (!titleInput || !slugInput) return;
 
-    attached = true;
     titleInput.addEventListener("input", () => {
-      // Only auto-fill when the slug is empty
-      // if (slugInput.value) return;
       setNativeValue(slugInput, toSlug(titleInput.value));
     });
   });
