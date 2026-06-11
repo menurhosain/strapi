@@ -54,9 +54,6 @@ const COLLECTION_SINGLE_ORDER = [
   "Service Details",
   "News",
   "News Details",
-  "Login",
-  "Forget Password",
-  "Dashboard",
 ];
 
 const COLLECTION_SINGLE_REST_ORDER = [
