@@ -1,3 +1,7 @@
+"use strict";
+
+const crypto = require("crypto");
+
 module.exports = (plugin) => {
   const originalUser = plugin.controllers.user;
 
@@ -120,7 +124,9 @@ module.exports = (plugin) => {
         return ctx.badRequest("Role 'subcontractor' not found.");
       }
 
-      // ── Create user ──────────────────────────────────────────────
+      // ── Create user (unconfirmed until email is verified) ────────
+      const confirmationToken = crypto.randomBytes(20).toString("hex");
+
       const user = await strapi.service("plugin::users-permissions.user").add({
         username,
         email: email.toLowerCase(),
@@ -131,26 +137,44 @@ module.exports = (plugin) => {
         location,
         type: "subcontractor",
         role: role.id,
-        confirmed: true,
+        confirmed: false,
+        confirmationToken,
         provider: "local",
       });
 
-      // ── Generate JWT ─────────────────────────────────────────────
-      const jwt = strapi
-        .service("plugin::users-permissions.jwt")
-        .issue({ id: user.id });
+      // ── Send confirmation email ───────────────────────────────────
+      // Link points to the Next.js route, which calls Strapi then redirects
+      const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+      const confirmationUrl = `${frontendUrl}/api/confirm-email?token=${confirmationToken}`;
 
-      [
-        "password",
-        "resetPasswordToken",
-        "confirmationToken",
-        "confirmed",
-        "blocked",
-      ].forEach((cur) => {
-        delete user[cur];
+      try {
+        await strapi
+          .plugin("email")
+          .service("email")
+          .send({
+            to: user.email,
+            subject: "Confirm your email address",
+            html: `
+              <p>Hi ${first_name},</p>
+              <p>Please confirm your email address by clicking the link below:</p>
+              <p><a href="${confirmationUrl}">Confirm Email</a></p>
+              <p>If you did not create an account, you can safely ignore this email.</p>
+            `,
+          });
+      } catch (emailError) {
+        await strapi.db
+          .query("plugin::users-permissions.user")
+          .delete({ where: { id: user.id } });
+        strapi.log.error("Failed to send confirmation email", emailError);
+        return ctx.internalServerError(
+          "Failed to send confirmation email. Please try again later.",
+        );
+      }
+
+      ctx.send({
+        message:
+          "A confirmation email has been sent to your email address. Please check your inbox.",
       });
-
-      ctx.send({ jwt, user });
     },
   });
 
