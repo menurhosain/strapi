@@ -10,8 +10,8 @@ COPY . .
 # Build the Strapi admin panel
 RUN npm run build
 
-# Copy backup file for import
-COPY backup-website-module-11-6-26.tar.gz /backup.tar.gz
+# Stash entire public dir outside /app/public so the bind mount doesn't hide it
+RUN cp -r /app/public /public-seed
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
