@@ -1,11 +1,10 @@
 #!/bin/sh
 set -e
 
-# Ensure public dir is writable after volume mount
 mkdir -p /app/public/uploads
 chmod -R 777 /app/public
 
-IMPORT_FLAG="/app/.strapi_imported"
+IMPORT_FLAG="/app/public/.strapi_imported"
 
 if [ ! -f "$IMPORT_FLAG" ]; then
   echo "[entrypoint] First run — starting Strapi to apply DB migrations..."
