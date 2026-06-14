@@ -17,7 +17,7 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Frontend : ${FRONTEND_URL}"
 echo "  Backend  : http://localhost:${PORT:-1337}"
-echo "  Backend  : http://localhost:${PORT:-1337}/admin"
+echo "  Admin    : http://localhost:${PORT:-1337}/admin"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
