@@ -4,7 +4,7 @@
   "info": {
     "singularName": "mega-menu",
     "pluralName": "mega-menus",
-    "displayName": "Mega menu"
+    "displayName": "Menu"
   },
   "options": {
     "draftAndPublish": true
@@ -15,15 +15,41 @@
     }
   },
   "attributes": {
-    "menus": {
-      "type": "component",
+    "login_label": {
+      "type": "string",
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
       },
-      "component": "shared.navigation-item",
-      "repeatable": true
+      "required": true
+    },
+    "login_link": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true
+    },
+    "signup_label": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "required": true
+    },
+    "signup_link": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "required": true
     }
   }
 }
